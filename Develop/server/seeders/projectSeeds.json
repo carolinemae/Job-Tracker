@@ -1,0 +1,20 @@
+[
+  {
+    "projectName": "Eden Stage 12",
+    "location": "Two Wells",
+    "description": "Subdivision",
+    "active": true
+  },
+  {
+    "projectName": "Liberty Stage 5",
+    "location": "Two Wells",
+    "description": "Subdivision",
+    "active": true
+  },
+  {
+    "projectName": "Liberty Stage 6",
+    "location": "Two Wells",
+    "description": "Subdivision",
+    "active": true
+  }
+]
