@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     projects: async () => {
-      return Project.find().sort({ createdAt: -1 });
+      return Project.find();
     },
     project: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId });

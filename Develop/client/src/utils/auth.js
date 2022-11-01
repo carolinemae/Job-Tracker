@@ -5,6 +5,14 @@ class AuthService {
     return decode(this.getToken());
   }
 
+  checkAdmin() {
+    if (decode(this.getToken()).data.admin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   loggedIn() {
     const token = this.getToken();
     // If there is a token and it's not expired, return `true`

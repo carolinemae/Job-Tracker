@@ -9,7 +9,6 @@ const Home = () => {
         {Auth.loggedIn() ? (
           <>
             Hi, {Auth.getProfile().data.firstName} {Auth.getProfile().data.lastName}!
-            {Auth.getProfile().data.admin}
           </>
         ) : (
           <>

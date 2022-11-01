@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { ADD_TIMESHEET } from '../../utils/mutations';
-import { QUERY_TIMESHEETS } from '../../utils/queries';
+// import { QUERY_TIMESHEETS } from '../../utils/queries';
 
 const TimesheetForm = () => {
     const [formState, setFormState] = useState({
@@ -13,20 +13,24 @@ const TimesheetForm = () => {
         endTime: '',
     });
 
-    const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
-        update(cache, { data: { addTimesheet } }) {
-            try {
-                const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
+  const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
 
-                cache.writeQuery({
-                    query: QUERY_TIMESHEETS,
-                    data: { timesheets: [addTimesheet, ...timesheets] },
-                });
-            } catch (e) {
-                console.error(e);
-            }
-        },
-    });
+
+    // const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
+    //     // Look at 22-State\01-Activities\16-Stu_Apollo-Review\Unsolved\client\src\components\ThoughtForm\index.js
+    //     update(cache, { data: { addTimesheet } }) {
+    //         try {
+    //             const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
+
+    //             cache.writeQuery({
+    //                 query: QUERY_TIMESHEETS,
+    //                 data: { timesheets: [addTimesheet, ...timesheets] },
+    //             });
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     },
+    // });
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -35,34 +39,38 @@ const TimesheetForm = () => {
           const { data } = await addTimesheet({
             variables: { ...formState },
           });
-    
-          setFormState({
-            date: '',
-            startTime: '',
-            lunchStart: '',
-            lunchEnd: '',
-            endTime: '',
-          });
+
+        //   setFormState({
+        //     date: '',
+        //     startTime: '',
+        //     lunchStart: '',
+        //     lunchEnd: '',
+        //     endTime: '',
+        //   });
+            window.location.reload();
         } catch (err) {
           console.error(err);
         }
-      };
+    };
 
-      const handleChange = (event) => {
-        const { name, value } = event.target;
+    const handleChange = (event) => {
+    const { name, value } = event.target;
 
-        setFormState({ ...formState, [name]: value });
-    
-        // if (name === 'thoughtText') {
-        //   setFormState({ ...formState, [name]: value });
-        // } else if (name !== 'thoughtText') {
-        //   setFormState({ ...formState, [name]: value });
-        // }
-      };
+    setFormState({ ...formState, [name]: value });
 
-      return (
+    // if (name === 'thoughtText') {
+    //   setFormState({ ...formState, [name]: value });
+    // } else if (name !== 'thoughtText') {
+    //   setFormState({ ...formState, [name]: value });
+    // }
+    };
+
+    return (
         <div>
-            <form className='timesheet-form' onSubmit={handleFormSubmit}>
+            <form 
+                className='timesheet-form' 
+                onSubmit={handleFormSubmit}
+            >
                 <div className='date-span'>
                     <label 
                         for='date'
@@ -144,8 +152,9 @@ const TimesheetForm = () => {
                     </button>
                 </div>
             </form>
+
         </div>
-      )
-}
+    );
+};
 
 export default TimesheetForm;

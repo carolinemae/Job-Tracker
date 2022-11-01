@@ -12,6 +12,31 @@ export const QUERY_EMPLOYEE = gql`
   }
 `;
 
+export const QUERY_EMPLOYEES = gql`
+  query employees {
+    employees {
+      _id
+      firstName
+      lastName
+      email
+      admin
+    }
+  }
+`;
+
+export const QUERY_PROJECTS = gql`
+  query projects {
+    projects {
+      _id
+      projectName
+      startDate
+      location
+      description
+      active
+    }
+  }
+`;
+
 export const QUERY_TIMESHEETS = gql`
     query getTimesheets {
         timesheets {

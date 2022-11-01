@@ -3,10 +3,12 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 
-
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Projects from './pages/Projects';
+import Employees from './pages/Employees';
+import ViewTimesheets from './pages/ViewTimesheets';
 import CreateTimesheet from './pages/CreateTimesheet';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -53,6 +55,18 @@ function App() {
               <Route 
                 path="/signup" 
                 element={<Signup />} 
+              />
+              <Route 
+                path="/projects" 
+                element={<Projects />} 
+              />
+              <Route 
+                path="/employees" 
+                element={<Employees />} 
+              />
+              <Route 
+                path="/timesheets" 
+                element={<ViewTimesheets />} 
               />
               <Route 
                 path="/create" 

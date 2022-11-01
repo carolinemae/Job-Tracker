@@ -5,7 +5,7 @@ const CreateTimesheet = () => {
     return (
         <div>
             <TimesheetForm />
-            {/* Another test */}
+            This is where you create a timesheet
         </div>
     )
 };
