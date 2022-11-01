@@ -21,15 +21,25 @@ const typeDefs = gql`
     password: String
     firstName: String
     lastName: String
-    startDate: String
     admin: String
+  }
+
+  type Auth {
+    token: ID!
+    employee: Employee
   }
 
   type Query {
     projects: [Project]!
     project(projectId: ID!): Project
     equipment: [Equipment]!
-    employees: [Employee]!
+    employees: [Employee]
+    employee(firstName: String!, lastName: String!): Employee
+  }
+
+  type Mutation {
+    addEmployee(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
   }
 `;
 

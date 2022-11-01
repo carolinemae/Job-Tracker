@@ -1,10 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 const Home = () => {
   return (
     <main>
       <div>
-        This is a test
+        {Auth.loggedIn() ? (
+          <>
+            Hi, {Auth.getProfile().data.firstName} {Auth.getProfile().data.lastName}!
+            {Auth.getProfile().data.admin}
+          </>
+        ) : (
+          <>
+            You must be logged in.
+          </>
+        )}
       </div>
     </main>
   );
