@@ -3,12 +3,15 @@ import { gql } from '@apollo/client';
 export const ADD_TIMESHEET = gql`
   mutation addTimesheet($date: String!, $startTime: String!, $lunchStart: String!, $lunchEnd: String!, $endTime: String!) {
     addTimesheet(date: $date, startTime: $startTime, lunchStart: $lunchStart, lunchEnd: $lunchEnd, endTime: $endTime) {
-      _id
-      date
-      startTime
-      lunchStart
-      lunchEnd
-      endTime
+      token
+      timesheet {
+        _id
+        date
+        startTime
+        lunchStart
+        lunchEnd
+        endTime
+      }
     }
   }
 `;
@@ -35,6 +38,17 @@ export const ADD_EMPLOYEE = gql`
         firstName
         lastName
       }
+    }
+  }
+`;
+
+export const CREATE_PROJECT = gql`
+  mutation createProject($projectName: String!, $location: String!, $description: String!) {
+    createProject(projectName: $projectName, location: $location, description: $description) {
+      _id
+      projectName
+      location
+      description
     }
   }
 `;

@@ -24,6 +24,27 @@ export const QUERY_EMPLOYEES = gql`
   }
 `;
 
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      firstName
+      lastName
+      email
+      admin
+      timesheets {
+        _id
+        employee
+        date
+        startTime
+        lunchStart
+        lunchEnd
+        endTime
+      }
+    }
+  }
+`;
+
 export const QUERY_PROJECTS = gql`
   query projects {
     projects {
@@ -37,16 +58,55 @@ export const QUERY_PROJECTS = gql`
   }
 `;
 
-export const QUERY_TIMESHEETS = gql`
-    query getTimesheets {
-        timesheets {
-            _id
-            date
-            startTime
-            lunchStart
-            lunchEnd
-            endTime
-        }
+export const QUERY_PROJECT = gql`
+  query project($projectId: ID!) {
+    projects {
+      _id
+      projectName
+      startDate
+      location
+      description
+      active
     }
+  }
 `;
+
+export const QUERY_EQUIPMENT = gql`
+  query equipment {
+    equipment {
+      _id
+      equipId
+      equipName
+    }
+  }
+`
+
+export const QUERY_TIMESHEETS = gql`
+  query timesheets {
+      timesheets {
+          _id
+          date
+          startTime
+          lunchStart
+          lunchEnd
+          endTime
+      }
+  }
+`;
+
+// export const QUERY_TIMESHEETS = gql`
+//   query timesheets {
+//       timesheets {
+//           _id
+//           date
+//           startTime
+//           lunchStart
+//           lunchEnd
+//           endTime
+//           employee {
+//             firstName
+//           }
+//       }
+//   }
+// `;
 

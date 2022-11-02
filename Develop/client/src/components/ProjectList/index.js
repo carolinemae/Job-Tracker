@@ -10,10 +10,10 @@ const ProjectList = ({ projects }) => {
         <div>
             <table>
                 <tr>
-                    <td>Firstname</td>
-                    <td>Lastname</td>
-                    <td>Email</td>
-                    <td>Admin</td>
+                    <td>Project Name</td>
+                    <td>Location</td>
+                    <td>Description</td>
+                    <td>Active</td>
                 </tr>
                 {projects && projects.map((project) => (
                     <tr key={project._id}>

@@ -8,32 +8,21 @@ const timesheetSchema = new Schema({
         get: (timestamp) => dateFormat(timestamp),
     },
     startTime: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        type: String,
     },
     lunchStart: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        type: String,
     },
     lunchEnd: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        type: String,
     },
     endTime: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        type: String,
     },
-    employee_id: {
+    employee: {
         type: String,
         required: true,
-        references: {
-            model: 'employee',
-            key: '_id',
-        },
+        trim: true,
     },
 });
 

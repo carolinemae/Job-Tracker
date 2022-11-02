@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Project, Equipment, Employee } = require('../models');
+const { Project, Equipment, Employee, Timesheet } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -11,11 +11,23 @@ const resolvers = {
       return Project.findOne({ _id: projectId });
     },
     equipment: async () => {
-      return Equipment.find().sort({ equipId: asc });
+      return Equipment.find();;
     },
     employees: async () => {
       return Employee.find();
     },
+    // timesheets: async () => {
+    //   return Timesheet.find();
+    // },
+    // timesheet: async (parent, { _id }) => {
+    //   return Timesheet.findById(_id).populate('employee');
+    // },
+    me: async (parent, args, context) => {
+      if (context.employee) {
+        return Employee.findOne({ _id: context.employee._id }).populate('timesheets');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
   },
 
   Mutation: {
@@ -24,6 +36,33 @@ const resolvers = {
       const token = signToken(employee);
       return { token, employee };
     },
+    createProject: async (parent, { projectName, location, description }, context) => {
+      if (context.user) {
+        const project = await Project.create({ projectName, location, description });
+        return project;
+      };
+      // Does this need token???
+    },
+    // addTimesheet: async (parent, { date, startTime, lunchStart, lunchEnd, endTime }, context) => {
+    //   if (context.employee) {
+    //     const timesheet = await Timesheet.create({
+    //       date, 
+    //       startTime, 
+    //       lunchStart, 
+    //       lunchEnd, 
+    //       endTime,
+    //       employee: context.employee.firstName,
+    //     });
+
+    //     await Employee.findOneAndUpdate(
+    //       { _id: context.employee._id },
+    //       { $addToSet: { timesheets: timesheet._id } }
+    //     );
+
+    //     return timesheet;
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
     login: async (parent, { email, password }) => {
       const employee = await Employee.findOne({ email });
 
@@ -42,34 +81,6 @@ const resolvers = {
       return { token, employee };
     },
   },
-
-  // Mutation: {
-  //   addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-  //     return Thought.create({ thoughtText, thoughtAuthor });
-  //   },
-  //   addComment: async (parent, { thoughtId, commentText }) => {
-  //     return Thought.findOneAndUpdate(
-  //       { _id: thoughtId },
-  //       {
-  //         $addToSet: { comments: { commentText } },
-  //       },
-  //       {
-  //         new: true,
-  //         runValidators: true,
-  //       }
-  //     );
-  //   },
-  //   removeThought: async (parent, { thoughtId }) => {
-  //     return Thought.findOneAndDelete({ _id: thoughtId });
-  //   },
-  //   removeComment: async (parent, { thoughtId, commentId }) => {
-  //     return Thought.findOneAndUpdate(
-  //       { _id: thoughtId },
-  //       { $pull: { comments: { _id: commentId } } },
-  //       { new: true }
-  //     );
-  //   },
-  // },
 };
 
 module.exports = resolvers;

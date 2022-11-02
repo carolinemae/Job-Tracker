@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { ADD_TIMESHEET } from '../../utils/mutations';
-// import { QUERY_TIMESHEETS } from '../../utils/queries';
+import { QUERY_TIMESHEETS } from '../../utils/queries';
+import Auth from '../../utils/auth';
 
 const TimesheetForm = () => {
     const [formState, setFormState] = useState({
@@ -11,26 +12,30 @@ const TimesheetForm = () => {
         lunchStart: '',
         lunchEnd: '',
         endTime: '',
+        employee: Auth.getProfile().data.firstName,
     });
 
-  const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
+  const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
+    update(cache, { data: {addTimesheet} }) {
+        try {
+            const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
 
+            cache.writeQuery({
+                query: QUERY_TIMESHEETS,
+                data: { timesheets: [addTimesheet, ...timesheets] },
+            });
+        } catch (e) {
+            console.error(e);
+        }
 
-    // const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
-    //     // Look at 22-State\01-Activities\16-Stu_Apollo-Review\Unsolved\client\src\components\ThoughtForm\index.js
-    //     update(cache, { data: { addTimesheet } }) {
-    //         try {
-    //             const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
-
-    //             cache.writeQuery({
-    //                 query: QUERY_TIMESHEETS,
-    //                 data: { timesheets: [addTimesheet, ...timesheets] },
-    //             });
-    //         } catch (e) {
-    //             console.error(e);
-    //         }
-    //     },
-    // });
+        // update me object's cache
+        // const { me } = cache.readQuery({ query: QUERY_ME });
+        // cache.writeQuery({
+        //     query: QUERY_ME,
+        //     data: { me: { ...me, thoughts: [...me.thoughts, addThought] } },
+        // });
+    },
+  });
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -39,15 +44,6 @@ const TimesheetForm = () => {
           const { data } = await addTimesheet({
             variables: { ...formState },
           });
-
-        //   setFormState({
-        //     date: '',
-        //     startTime: '',
-        //     lunchStart: '',
-        //     lunchEnd: '',
-        //     endTime: '',
-        //   });
-            window.location.reload();
         } catch (err) {
           console.error(err);
         }
@@ -58,11 +54,6 @@ const TimesheetForm = () => {
 
     setFormState({ ...formState, [name]: value });
 
-    // if (name === 'thoughtText') {
-    //   setFormState({ ...formState, [name]: value });
-    // } else if (name !== 'thoughtText') {
-    //   setFormState({ ...formState, [name]: value });
-    // }
     };
 
     return (
@@ -88,13 +79,13 @@ const TimesheetForm = () => {
                 </div>
                 <div className='start-time-span'>
                     <label 
-                        for='start-time'
+                        for='startTime'
                         className='form-label'
                     >
                         Start Time
                     </label>
                     <input 
-                        name='start-time'
+                        name='startTime'
                         type='time'
                         value={formState.startTime}
                         className='form-input'
@@ -103,13 +94,13 @@ const TimesheetForm = () => {
                 </div>
                 <div className='lunch-start-span'>
                     <label 
-                        for='lunch-start'
+                        for='lunchStart'
                         className='form-label'
                     >
                         Lunch Start
                     </label>
                     <input 
-                        name='lunch-start'
+                        name='lunchStart'
                         type='time'
                         value={formState.lunchStart}
                         className='form-input'
@@ -118,13 +109,13 @@ const TimesheetForm = () => {
                 </div>
                 <div className='lunch-end-span'>
                     <label 
-                        for='lunch-end'
+                        for='lunchEnd'
                         className='form-label'
                     >
                         Lunch End
                     </label>
                     <input 
-                        name='lunch-end'
+                        name='lunchEnd'
                         type='time'
                         value={formState.lunchEnd}
                         className='form-input'
@@ -133,13 +124,13 @@ const TimesheetForm = () => {
                 </div>
                 <div className='end-time-span'>
                     <label 
-                        for='end-time'
+                        for='endTime'
                         className='form-label'
                     >
                         End Time
                     </label>
                     <input 
-                        name='end-time'
+                        name='endTime'
                         type='time'
                         value={formState.endTime}
                         className='form-input'

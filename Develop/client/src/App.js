@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Projects from './pages/Projects';
+import Equipment from './pages/Equipment';
 import Employees from './pages/Employees';
 import ViewTimesheets from './pages/ViewTimesheets';
 import CreateTimesheet from './pages/CreateTimesheet';
@@ -59,6 +60,10 @@ function App() {
               <Route 
                 path="/projects" 
                 element={<Projects />} 
+              />
+              <Route 
+                path="/equipment" 
+                element={<Equipment />} 
               />
               <Route 
                 path="/employees" 

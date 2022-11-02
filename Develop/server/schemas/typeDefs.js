@@ -7,6 +7,7 @@ const typeDefs = gql`
     startDate: String
     location: String
     active: String
+    description: String
   }
 
   type Equipment {
@@ -32,16 +33,44 @@ const typeDefs = gql`
   type Query {
     projects: [Project]
     project(projectId: ID!): Project
-    equipment: [Equipment]!
+    equipment: [Equipment]
     employees: [Employee]
     employee(firstName: String!, lastName: String!): Employee
+    me: Employee
   }
 
   type Mutation {
     addEmployee(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    createProject(projectName: String!, location: String!, description: String!): Project
   }
 `;
 
 module.exports = typeDefs;
 
+// type Query {
+//   timesheets(employee: ID, firstName:): [Timesheet]
+//   timesheet: Timesheet
+// }
+
+// type Mutation {
+//   addTimesheet(date: String!, startTime: String!, lunchStart: String!, lunchEnd: String!, endTime: String!): Auth
+// }
+
+// type Auth {
+//   timesheet: Timesheet
+// }
+
+// type Employee {
+//   timesheets: [Timesheet]
+// }
+
+// type Timesheet {
+//   _id: ID
+//   employee: Employee
+//   date: String
+//   startTime: String
+//   lunchStart: String
+//   lunchEnd: String
+//   endTime: String
+// }
