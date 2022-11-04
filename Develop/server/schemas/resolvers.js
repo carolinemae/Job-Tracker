@@ -11,14 +11,18 @@ const resolvers = {
       return Project.findOne({ _id: projectId });
     },
     equipment: async () => {
-      return Equipment.find();;
+      return Equipment.find();
     },
     employees: async () => {
-      return Employee.find();
+      return Employee.find().populate('timesheets');
     },
-    // timesheets: async () => {
-    //   return Timesheet.find();
-    // },
+    employee: async (parent, { employee }) => {
+      return Employee.findOne({ employee }).populate('timesheets');
+    },
+    timesheets: async (parent, { employee }) => {
+      const params = employee ? { employee } : {};
+      return Timesheet.find(params);
+    },
     // timesheet: async (parent, { _id }) => {
     //   return Timesheet.findById(_id).populate('employee');
     // },
@@ -37,11 +41,38 @@ const resolvers = {
       return { token, employee };
     },
     createProject: async (parent, { projectName, location, description }, context) => {
-      if (context.user) {
+      console.log(context.employee);
+      if (context.employee.admin) {
         const project = await Project.create({ projectName, location, description });
         return project;
       };
-      // Does this need token???
+    },
+    addEquipment: async (parent, { equipId, equipName }, context) => {
+      if (context.employee.admin) {
+        const equipment = await Equipment.create({ equipId, equipName });
+        return equipment;
+      };
+    },
+    addTimesheet: async (parent, { date, startTime, endTime }, context) => {
+      console.log(context.employee);
+      if (context.employee) {
+        const timesheet = await Timesheet.create(
+          { 
+            date, 
+            startTime, 
+            endTime, 
+            employee: context.employee.firstName 
+          }
+        );
+        console.log(timesheet);
+
+        await Employee.findOneAndUpdate(
+          { _id: context.employee._id },
+          { $addToSet: { timesheets: timesheet._id } }
+        )
+        return timesheet;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     // addTimesheet: async (parent, { date, startTime, lunchStart, lunchEnd, endTime }, context) => {
     //   if (context.employee) {

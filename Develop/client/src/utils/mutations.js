@@ -1,20 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const ADD_TIMESHEET = gql`
-  mutation addTimesheet($date: String!, $startTime: String!, $lunchStart: String!, $lunchEnd: String!, $endTime: String!) {
-    addTimesheet(date: $date, startTime: $startTime, lunchStart: $lunchStart, lunchEnd: $lunchEnd, endTime: $endTime) {
-      token
-      timesheet {
-        _id
-        date
-        startTime
-        lunchStart
-        lunchEnd
-        endTime
-      }
-    }
-  }
-`;
+
 
 export const LOGIN_EMPLOYEE = gql`
   mutation login($email: String!, $password: String!) {
@@ -49,6 +35,28 @@ export const CREATE_PROJECT = gql`
       projectName
       location
       description
+    }
+  }
+`;
+
+export const ADD_EQUIPMENT = gql`
+  mutation addEquipment($equipId: String!, $equipName: String!) {
+    addEquipment(equipId: $equipId, equipName: $equipName) {
+      _id
+      equipId
+      equipName
+    }
+  }
+`;
+
+export const ADD_TIMESHEET = gql`
+  mutation addTimesheet($date: String!, $startTime: String!, $endTime: String!) {
+    addTimesheet(date: $date, startTime: $startTime, endTime: $endTime) {
+      _id
+      date
+      startTime
+      endTime
+      employee
     }
   }
 `;

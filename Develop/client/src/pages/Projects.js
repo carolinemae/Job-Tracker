@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 
 import ProjectList from '../components/ProjectList';
-import ProjectForm from '../components/CreateProject';
+import ProjectForm from '../components/ProjectForm';
 
 import { QUERY_PROJECTS } from '../utils/queries';
 

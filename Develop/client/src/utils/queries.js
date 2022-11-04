@@ -8,6 +8,12 @@ export const QUERY_EMPLOYEE = gql`
       lastName
       email
       admin
+      timesheets {
+        _id
+        date
+        startTime
+        endTime
+      }
     }
   }
 `;
@@ -37,8 +43,6 @@ export const QUERY_ME = gql`
         employee
         date
         startTime
-        lunchStart
-        lunchEnd
         endTime
       }
     }
@@ -83,14 +87,13 @@ export const QUERY_EQUIPMENT = gql`
 
 export const QUERY_TIMESHEETS = gql`
   query timesheets {
-      timesheets {
-          _id
-          date
-          startTime
-          lunchStart
-          lunchEnd
-          endTime
-      }
+    timesheets {
+      _id
+      date
+      startTime
+      endTime
+      employee
+    }
   }
 `;
 
@@ -100,8 +103,6 @@ export const QUERY_TIMESHEETS = gql`
 //           _id
 //           date
 //           startTime
-//           lunchStart
-//           lunchEnd
 //           endTime
 //           employee {
 //             firstName

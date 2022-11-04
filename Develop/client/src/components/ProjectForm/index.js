@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_PROJECT } from '../../utils/mutations';
+import { QUERY_PROJECTS } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 const ProjectForm = () => {
@@ -10,21 +11,21 @@ const ProjectForm = () => {
         description: '',
     });
 
-    const [createProject, { error }] = useMutation(CREATE_PROJECT);
+    // const [createProject, { error }] = useMutation(CREATE_PROJECT);
 
-    // const [createProject, { error }] = useMutation(CREATE_PROJECT, {
-    //     update(cache, { data: { createProject } }) {
-    //         try {
-    //             const { projects } = cache.readQuery({ query: QUERY_PROJECTS });
-    //             cache.writeQuery({
-    //                 query: QUERY_PROJECTS,
-    //                 data: { projects: [createProject, ...projects] },
-    //             });
-    //         } catch (err) {
-    //             console.error(err);
-    //         }
-    //     }
-    // });
+    const [createProject, { error }] = useMutation(CREATE_PROJECT, {
+        update(cache, { data: { createProject } }) {
+            try {
+                const { projects } = cache.readQuery({ query: QUERY_PROJECTS });
+                cache.writeQuery({
+                    query: QUERY_PROJECTS,
+                    data: { projects: [createProject, ...projects] },
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    });
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -35,10 +36,7 @@ const ProjectForm = () => {
                 variables: { ...formState },
             });
 
-            console.log(data);
-            console.log({ ...formState });
-            // window.location.reload();
-
+            handleChange();
         } catch (err) {
             console.error(err);
         }

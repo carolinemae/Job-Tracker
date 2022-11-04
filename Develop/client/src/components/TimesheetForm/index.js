@@ -9,24 +9,25 @@ const TimesheetForm = () => {
     const [formState, setFormState] = useState({
         date: '',
         startTime: '',
-        lunchStart: '',
-        lunchEnd: '',
         endTime: '',
         employee: Auth.getProfile().data.firstName,
     });
 
-  const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
-    update(cache, { data: {addTimesheet} }) {
-        try {
-            const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
+    const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
 
-            cache.writeQuery({
-                query: QUERY_TIMESHEETS,
-                data: { timesheets: [addTimesheet, ...timesheets] },
-            });
-        } catch (e) {
-            console.error(e);
-        }
+    
+
+//   const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
+    // update(cache, { data: {addTimesheet} }) {
+        // try {
+        //     const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
+        //     cache.writeQuery({
+        //         query: QUERY_TIMESHEETS,
+        //         data: { timesheets: [addTimesheet, ...timesheets] },
+        //     });
+        // } catch (e) {
+        //     console.error(e);
+        // }
 
         // update me object's cache
         // const { me } = cache.readQuery({ query: QUERY_ME });
@@ -34,8 +35,8 @@ const TimesheetForm = () => {
         //     query: QUERY_ME,
         //     data: { me: { ...me, thoughts: [...me.thoughts, addThought] } },
         // });
-    },
-  });
+    // },
+//   });
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -44,16 +45,16 @@ const TimesheetForm = () => {
           const { data } = await addTimesheet({
             variables: { ...formState },
           });
+          handleChange();
+          console.log(...formState);
         } catch (err) {
           console.error(err);
         }
     };
 
     const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({ ...formState, [name]: value });
-
+        const { name, value } = event.target;
+        setFormState({ ...formState, [name]: value });
     };
 
     return (
@@ -88,36 +89,6 @@ const TimesheetForm = () => {
                         name='startTime'
                         type='time'
                         value={formState.startTime}
-                        className='form-input'
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className='lunch-start-span'>
-                    <label 
-                        for='lunchStart'
-                        className='form-label'
-                    >
-                        Lunch Start
-                    </label>
-                    <input 
-                        name='lunchStart'
-                        type='time'
-                        value={formState.lunchStart}
-                        className='form-input'
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className='lunch-end-span'>
-                    <label 
-                        for='lunchEnd'
-                        className='form-label'
-                    >
-                        Lunch End
-                    </label>
-                    <input 
-                        name='lunchEnd'
-                        type='time'
-                        value={formState.lunchEnd}
                         className='form-input'
                         onChange={handleChange}
                     />

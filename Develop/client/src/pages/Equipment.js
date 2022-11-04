@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 
 import EquipmentList from '../components/EquipmentList';
+import EquipmentForm from '../components/EquipmentForm';
 
 import { QUERY_EQUIPMENT } from '../utils/queries';
 
@@ -14,9 +15,12 @@ const Equipment = () => {
             {loading ? (
                 <div>Loading...</div>
             ) : (
+                <>
                 <EquipmentList 
                     equipment={equipment}
                 />
+                <EquipmentForm />
+                </>
             )}
         </div>
     );

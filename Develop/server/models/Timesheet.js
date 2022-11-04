@@ -10,12 +10,6 @@ const timesheetSchema = new Schema({
     startTime: {
         type: String,
     },
-    lunchStart: {
-        type: String,
-    },
-    lunchEnd: {
-        type: String,
-    },
     endTime: {
         type: String,
     },
