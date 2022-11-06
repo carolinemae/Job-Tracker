@@ -6,8 +6,9 @@ import Logo from '../../images/logo.png';
 const Header = () => {
 
     const logout = (event) => {
-      event.preventDefault();
-      Auth.logout();
+        event.preventDefault();
+        Auth.logout();
+        window.location.assign('/');
     };
 
     return (

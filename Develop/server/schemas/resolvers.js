@@ -64,9 +64,14 @@ const resolvers = {
           }
         );
 
-        console.log(timesheet);
+        console.log(project);
 
         await Employee.findOneAndUpdate(
+          { _id: context.employee._id },
+          { $addToSet: { timesheets: timesheet._id } }
+        );
+
+        await Project.findOneAndUpdate(
           { _id: context.employee._id },
           { $addToSet: { timesheets: timesheet._id } }
         );
@@ -80,14 +85,14 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    toggleApproved: async (parent, { timesheetId }, context) => {
-      if (context.employee) {
-        return Timesheet.findOneAndUpdate(
-          { _id: timesheetId },
-          { approved: true }
-        );
-      }
-    },
+    // toggleApproved: async (parent, { timesheetId }, context) => {
+    //   if (context.employee) {
+    //     return Timesheet.findOneAndUpdate(
+    //       { _id: timesheetId },
+    //       { approved: true }
+    //     );
+    //   }
+    // },
     login: async (parent, { email, password }) => {
       const employee = await Employee.findOne({ email });
 

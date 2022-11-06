@@ -9,7 +9,6 @@ const EmployeeList = ({ employees }) => {
 
     const toggleAdmin = (event) => {
         event.preventDefault();
-        console.log(event);
     };
 
     return (

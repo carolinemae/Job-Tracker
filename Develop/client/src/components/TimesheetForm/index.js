@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useQuery } from '@apollo/client';
 import { ADD_TIMESHEET } from '../../utils/mutations';
-import Auth from '../../utils/auth';
-import ProjectDropdown from '../ProjectDropdown';
 import { QUERY_PROJECTS } from '../../utils/queries';
+import Auth from '../../utils/auth';
 
 const TimesheetForm = () => {
+    const savedDate = localStorage.getItem('date');
+    const savedStartTime = localStorage.getItem('startTime');
+    const savedEndTime = localStorage.getItem('endTime');
+    const savedProject = localStorage.getItem('project');
+
     const [formState, setFormState] = useState({
-        date: '',
-        startTime: '',
-        endTime: '',
-        project: '',
+        date: savedDate,
+        startTime: savedStartTime,
+        endTime: savedEndTime,
+        project: savedProject,
         employee: Auth.getProfile().data.firstName,
     });
 
@@ -32,6 +36,7 @@ const TimesheetForm = () => {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
+        localStorage.setItem(name, value);
     };
 
     const { data } = useQuery(QUERY_PROJECTS);
@@ -89,36 +94,18 @@ const TimesheetForm = () => {
                     />
                 </div>
 
-                {/* <div className='project-span'>
-                    <label 
-                        for='project'
-                        className='form-label'
-                    >
-                        Project
-                    </label>
-                    <input 
-                        name='project'
-                        type='text'
-                        value={formState.project}
-                        className='form-input'
-                        onChange={handleChange}
-                    />
-                </div> */}
-
-                <select id='projects' name='projects'>
+                <select id='projects' name='project' onChange={handleChange} value={formState.project}>
+                    <option>Select Project</option>
                     {projects && projects.map((project) => (
                         <option 
+                            name='project'
                             key={project._id} 
-                            // value={project.projectName}
-                            value={formState.project}
-                            onClick={handleChange}
+                            value={project.projectName}
                         >
                             {project.projectName}
                         </option>
                     ))}
                 </select>
-
-                {/* <ProjectDropdown projects={projects} /> */}
 
                 <div className='button-span'>
                     <button className='submit-timesheet' type='submit'>
