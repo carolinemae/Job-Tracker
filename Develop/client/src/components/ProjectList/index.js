@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const ProjectList = ({ projects }) => {
     if (!projects.length) {
@@ -7,13 +6,13 @@ const ProjectList = ({ projects }) => {
     }
 
     return (
-        <div>
+        <div className='center'>
             <table>
                 <tr>
-                    <td>Project Name</td>
-                    <td>Location</td>
-                    <td>Description</td>
-                    <td>Active</td>
+                    <th>Project Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Active</th>
                 </tr>
                 {projects && projects.map((project) => (
                     <tr key={project._id}>

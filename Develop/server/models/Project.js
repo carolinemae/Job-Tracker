@@ -31,6 +31,12 @@ const projectSchema = new Schema({
         type: Boolean,
         default: true,
     },
+    timesheets: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Timesheet',
+        },
+    ],
 });
 
 const Project = model('Project', projectSchema);

@@ -20,12 +20,24 @@ const Header = () => {
                     <Link to='/'>Home</Link>
                     {Auth.loggedIn() ? (
                     <>
-                        <Link onClick={logout}>Logout</Link>
-                    </>
+                        {Auth.checkAdmin() ? (
+                        <>
+                            <Link to='/projects'>Projects</Link>
+                            <Link to='/equipment'>Equipment</Link>
+                            <Link to='/employees'>Employees</Link>
+                            <Link to='/timesheets'>Timesheets</Link>
+                        </>
+                        ) : (
+                        <>
+                        </>
+                        )}
+                        <Link to='/create'>Create</Link>
+                        <Link onClick={logout} className='log'>Logout</Link>
+                        </>
                     ) : (
                     <>
-                        <Link to='/login'>Login</Link>
-                        <Link to='/signup'>Signup</Link>
+                        <Link to='/login' className='log'>Login</Link>
+                        <Link to='/signup' className='log'>Signup</Link>
                     </>
                     )} 
                 </nav>

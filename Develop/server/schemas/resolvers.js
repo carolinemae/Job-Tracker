@@ -41,7 +41,6 @@ const resolvers = {
       return { token, employee };
     },
     createProject: async (parent, { projectName, location, description }, context) => {
-      console.log(context.employee);
       if (context.employee.admin) {
         const project = await Project.create({ projectName, location, description });
         return project;
@@ -53,47 +52,42 @@ const resolvers = {
         return equipment;
       };
     },
-    addTimesheet: async (parent, { date, startTime, endTime }, context) => {
-      console.log(context.employee);
+    addTimesheet: async (parent, { date, startTime, endTime, project }, context) => {
       if (context.employee) {
         const timesheet = await Timesheet.create(
           { 
             date, 
             startTime, 
             endTime, 
+            project,
             employee: context.employee.firstName 
           }
         );
+
         console.log(timesheet);
 
         await Employee.findOneAndUpdate(
           { _id: context.employee._id },
           { $addToSet: { timesheets: timesheet._id } }
-        )
+        );
+
+        // await Project.findOneAndUpdate(
+        //   { _id: context.employee._id },
+        //   { $addToSet: { timesheets: timesheet._id } }
+        // );
+
         return timesheet;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // addTimesheet: async (parent, { date, startTime, lunchStart, lunchEnd, endTime }, context) => {
-    //   if (context.employee) {
-    //     const timesheet = await Timesheet.create({
-    //       date, 
-    //       startTime, 
-    //       lunchStart, 
-    //       lunchEnd, 
-    //       endTime,
-    //       employee: context.employee.firstName,
-    //     });
-
-    //     await Employee.findOneAndUpdate(
-    //       { _id: context.employee._id },
-    //       { $addToSet: { timesheets: timesheet._id } }
-    //     );
-
-    //     return timesheet;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+    toggleApproved: async (parent, { timesheetId }, context) => {
+      if (context.employee) {
+        return Timesheet.findOneAndUpdate(
+          { _id: timesheetId },
+          { approved: true }
+        );
+      }
+    },
     login: async (parent, { email, password }) => {
       const employee = await Employee.findOne({ email });
 

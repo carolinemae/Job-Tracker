@@ -29,8 +29,6 @@ const ProjectForm = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
-        console.log(Auth.loggedIn());
         try {
             const { data } = await createProject({
                 variables: { ...formState },

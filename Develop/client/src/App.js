@@ -9,7 +9,7 @@ import Signup from './pages/Signup';
 import Projects from './pages/Projects';
 import Equipment from './pages/Equipment';
 import Employees from './pages/Employees';
-import ViewTimesheets from './pages/ViewTimesheets';
+import Timesheets from './pages/Timesheets';
 import CreateTimesheet from './pages/CreateTimesheet';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -41,7 +41,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <main>
           <Header />
           <div className="container">
             <Routes>
@@ -71,7 +71,7 @@ function App() {
               />
               <Route 
                 path="/timesheets" 
-                element={<ViewTimesheets />} 
+                element={<Timesheets />} 
               />
               <Route 
                 path="/create" 
@@ -80,7 +80,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
-        </div>
+        </main>
       </Router>
     </ApolloProvider>
   );

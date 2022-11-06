@@ -7,11 +7,11 @@ const EquipmentList = ({ equipment }) => {
     }
 
     return (
-        <div>
+        <div className='center'>
             <table>
                 <tr>
-                    <td>ID #</td>
-                    <td>Equipment Make & Model</td>
+                    <th>ID #</th>
+                    <th>Equipment Make & Model</th>
                 </tr>
                 {equipment && equipment.map((equipment) => (
                     <tr key={equipment._id}>

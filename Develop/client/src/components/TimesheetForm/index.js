@@ -1,52 +1,29 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-
+import { useQuery } from '@apollo/client';
 import { ADD_TIMESHEET } from '../../utils/mutations';
-import { QUERY_TIMESHEETS } from '../../utils/queries';
 import Auth from '../../utils/auth';
+import ProjectDropdown from '../ProjectDropdown';
+import { QUERY_PROJECTS } from '../../utils/queries';
 
 const TimesheetForm = () => {
     const [formState, setFormState] = useState({
         date: '',
         startTime: '',
         endTime: '',
+        project: '',
         employee: Auth.getProfile().data.firstName,
     });
 
     const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
 
-    
-
-//   const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET, {
-    // update(cache, { data: {addTimesheet} }) {
-        // try {
-        //     const { timesheets } = cache.readQuery({ query: QUERY_TIMESHEETS });
-        //     cache.writeQuery({
-        //         query: QUERY_TIMESHEETS,
-        //         data: { timesheets: [addTimesheet, ...timesheets] },
-        //     });
-        // } catch (e) {
-        //     console.error(e);
-        // }
-
-        // update me object's cache
-        // const { me } = cache.readQuery({ query: QUERY_ME });
-        // cache.writeQuery({
-        //     query: QUERY_ME,
-        //     data: { me: { ...me, thoughts: [...me.thoughts, addThought] } },
-        // });
-    // },
-//   });
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-    
         try {
           const { data } = await addTimesheet({
             variables: { ...formState },
           });
           handleChange();
-          console.log(...formState);
         } catch (err) {
           console.error(err);
         }
@@ -57,8 +34,11 @@ const TimesheetForm = () => {
         setFormState({ ...formState, [name]: value });
     };
 
+    const { data } = useQuery(QUERY_PROJECTS);
+    const projects = data?.projects || [];
+
     return (
-        <div>
+        <div className='center'>
             <form 
                 className='timesheet-form' 
                 onSubmit={handleFormSubmit}
@@ -108,6 +88,38 @@ const TimesheetForm = () => {
                         onChange={handleChange}
                     />
                 </div>
+
+                {/* <div className='project-span'>
+                    <label 
+                        for='project'
+                        className='form-label'
+                    >
+                        Project
+                    </label>
+                    <input 
+                        name='project'
+                        type='text'
+                        value={formState.project}
+                        className='form-input'
+                        onChange={handleChange}
+                    />
+                </div> */}
+
+                <select id='projects' name='projects'>
+                    {projects && projects.map((project) => (
+                        <option 
+                            key={project._id} 
+                            // value={project.projectName}
+                            value={formState.project}
+                            onClick={handleChange}
+                        >
+                            {project.projectName}
+                        </option>
+                    ))}
+                </select>
+
+                {/* <ProjectDropdown projects={projects} /> */}
+
                 <div className='button-span'>
                     <button className='submit-timesheet' type='submit'>
                         Submit

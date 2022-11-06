@@ -58,6 +58,12 @@ export const QUERY_PROJECTS = gql`
       location
       description
       active
+      timesheets {
+        _id
+        date
+        startTime
+        endTime
+      }
     }
   }
 `;
@@ -93,21 +99,8 @@ export const QUERY_TIMESHEETS = gql`
       startTime
       endTime
       employee
+      approved
+      project
     }
   }
 `;
-
-// export const QUERY_TIMESHEETS = gql`
-//   query timesheets {
-//       timesheets {
-//           _id
-//           date
-//           startTime
-//           endTime
-//           employee {
-//             firstName
-//           }
-//       }
-//   }
-// `;
-

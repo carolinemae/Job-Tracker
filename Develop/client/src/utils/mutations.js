@@ -1,7 +1,5 @@
 import { gql } from '@apollo/client';
 
-
-
 export const LOGIN_EMPLOYEE = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -50,13 +48,14 @@ export const ADD_EQUIPMENT = gql`
 `;
 
 export const ADD_TIMESHEET = gql`
-  mutation addTimesheet($date: String!, $startTime: String!, $endTime: String!) {
-    addTimesheet(date: $date, startTime: $startTime, endTime: $endTime) {
+  mutation addTimesheet($date: String!, $startTime: String!, $endTime: String!, $project: String!) {
+    addTimesheet(date: $date, startTime: $startTime, endTime: $endTime, project: $project) {
       _id
       date
       startTime
       endTime
       employee
+      project
     }
   }
 `;

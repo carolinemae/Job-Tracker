@@ -5,7 +5,6 @@ const CreateTimesheet = () => {
     return (
         <div>
             <TimesheetForm />
-            This is where you create a timesheet
         </div>
     )
 };

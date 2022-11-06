@@ -18,6 +18,15 @@ const timesheetSchema = new Schema({
         required: true,
         trim: true,
     },
+    project: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    approved: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const Timesheet = model('Timesheet', timesheetSchema);

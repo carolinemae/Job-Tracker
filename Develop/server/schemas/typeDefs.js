@@ -8,6 +8,7 @@ const typeDefs = gql`
     location: String
     active: String
     description: String
+    timesheets: [Timesheet]!
   }
 
   type Equipment {
@@ -22,6 +23,8 @@ const typeDefs = gql`
     startTime: String
     endTime: String
     employee: String
+    approved: String
+    project: String
   }
 
   type Employee {
@@ -55,7 +58,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     createProject(projectName: String!, location: String!, description: String!): Project
     addEquipment(equipId: String!, equipName: String!): Equipment
-    addTimesheet(date: String!, startTime: String!, endTime: String!): Timesheet
+    addTimesheet(date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
+    toggleApproved(timesheetId: ID!): Timesheet
   }
 `;
 

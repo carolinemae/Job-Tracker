@@ -7,20 +7,24 @@ const TimesheetList = ({ timesheets }) => {
     }
 
     return (
-        <div>
+        <div className='center'>
             <table>
                 <tr>
-                    <td>Date</td>
-                    <td>Employee</td>
-                    <td>Start Time</td>
-                    <td>End Time</td>
+                    <th>Date</th>
+                    <th>Employee</th>
+                    <th>Project</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Approved</th>
                 </tr>
                 {timesheets && timesheets.map((timesheet) => (
                     <tr key={timesheet._id}>
-                            <td>{timesheet.date}</td>
-                            <td>{timesheet.employee}</td>
-                            <td>{timesheet.startTime}</td>
-                            <td>{timesheet.endTime}</td>
+                        <td>{timesheet.date}</td>
+                        <td>{timesheet.employee}</td>
+                        <td>{timesheet.project}</td>
+                        <td>{timesheet.startTime}</td>
+                        <td>{timesheet.endTime}</td>
+                        <td>{timesheet.approved}</td>
                     </tr>
                 ))}
             </table>
