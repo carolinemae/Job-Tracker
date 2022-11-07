@@ -104,3 +104,17 @@ export const QUERY_TIMESHEETS = gql`
     }
   }
 `;
+
+export const QUERY_TIMESHEET = gql`
+  query timesheet($timesheetId: ID!) {
+    timesheet {
+      _id
+      date
+      startTime
+      endTime
+      employee
+      approved
+      project
+    }
+  }
+`;

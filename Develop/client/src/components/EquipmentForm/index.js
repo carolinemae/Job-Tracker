@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_EQUIPMENT } from '../../utils/mutations';
 import { QUERY_EQUIPMENT } from '../../utils/queries';
-import Auth from '../../utils/auth';
 
 const EquipmentForm = () => {
     const [formState, setFormState] = useState({

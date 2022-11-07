@@ -56,6 +56,29 @@ export const ADD_TIMESHEET = gql`
       endTime
       employee
       project
+      tasks {
+        _id
+        equipId
+        taskDesc
+      }
+    }
+  }
+`;
+
+export const ADD_TASK = gql`
+  mutation addTask($timesheetId: ID!, $equipId: String!, $taskDesc: String!) {
+    addTask(timesheetId: $timesheetId, equipId: $equipId, taskDesc: $taskDesc) {
+      _id
+      date
+      startTime
+      endTime
+      employee
+      project
+      tasks {
+        _id
+        equipId
+        taskDesc
+      }
     }
   }
 `;

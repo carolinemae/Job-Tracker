@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import TimesheetForm from '../components/TimesheetForm';
 
 const Home = () => {
 return (
@@ -11,6 +11,16 @@ return (
           <div className='greeting'>
             Hi, {Auth.getProfile().data.firstName} {Auth.getProfile().data.lastName}!
           </div>
+          {Auth.checkAdmin() ? (
+            <>
+              <TimesheetForm />
+            </>
+          ) : (
+            <>
+              <TimesheetForm />
+            </>
+          )
+          }
           </>
         ) : (
           <>

@@ -19,13 +19,12 @@ const resolvers = {
     employee: async (parent, { employee }) => {
       return Employee.findOne({ employee }).populate('timesheets');
     },
-    timesheets: async (parent, { employee }) => {
-      const params = employee ? { employee } : {};
-      return Timesheet.find(params);
+    timesheets: async () => {
+      return Timesheet.find().sort('date');
     },
-    // timesheet: async (parent, { _id }) => {
-    //   return Timesheet.findById(_id).populate('employee');
-    // },
+    timesheet: async (parent, { timesheetId }) => {
+      return Timesheet.findOne({ _id: timesheetId });
+    },
     me: async (parent, args, context) => {
       if (context.employee) {
         return Employee.findOne({ _id: context.employee._id }).populate('timesheets');
@@ -64,8 +63,6 @@ const resolvers = {
           }
         );
 
-        console.log(project);
-
         await Employee.findOneAndUpdate(
           { _id: context.employee._id },
           { $addToSet: { timesheets: timesheet._id } }
@@ -84,6 +81,16 @@ const resolvers = {
         return timesheet;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    removeTimesheet: async (parent, { timesheetId }) => {
+      return Timesheet.findOneAndDelete({ _id: timesheetId });
+    },
+    addTask: async (parent, { timesheetId, equipId, taskDesc }) => {
+      return Timesheet.findOneAndUpdate(
+        { _id: timesheetId },
+        { $addToSet: { tasks: { equipId, taskDesc } } },
+        { new: true }
+      );
     },
     // toggleApproved: async (parent, { timesheetId }, context) => {
     //   if (context.employee) {

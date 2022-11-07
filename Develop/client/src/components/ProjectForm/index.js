@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_PROJECT } from '../../utils/mutations';
 import { QUERY_PROJECTS } from '../../utils/queries';
-import Auth from '../../utils/auth';
 
 const ProjectForm = () => {
     const [formState, setFormState] = useState({
@@ -10,8 +9,6 @@ const ProjectForm = () => {
         location: '',
         description: '',
     });
-
-    // const [createProject, { error }] = useMutation(CREATE_PROJECT);
 
     const [createProject, { error }] = useMutation(CREATE_PROJECT, {
         update(cache, { data: { createProject } }) {

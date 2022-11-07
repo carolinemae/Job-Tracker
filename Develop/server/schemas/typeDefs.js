@@ -25,6 +25,13 @@ const typeDefs = gql`
     employee: String
     approved: String
     project: String
+    tasks: [Task]!
+  }
+
+  type Task {
+    _id: ID
+    equipId: String
+    taskDesc: String
   }
 
   type Employee {
@@ -59,6 +66,8 @@ const typeDefs = gql`
     createProject(projectName: String!, location: String!, description: String!): Project
     addEquipment(equipId: String!, equipName: String!): Equipment
     addTimesheet(date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
+    removeTimesheet(timesheetId: ID!): Timesheet
+    addTask(timesheetId: ID!, equipId: String!, taskDesc: String!): Timesheet
     toggleApproved(timesheetId: ID!): Timesheet
   }
 `;
