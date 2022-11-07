@@ -24,22 +24,21 @@ const TimesheetForm = () => {
     // console.log(customId);
     // --------------------------------
 
+    // this is just a test
+    const tasks = [];
+    tasks.push({'equipId': 'L65', 'taskDesc': 'test description'});
+    tasks.push({'equipId': 'L68', 'taskDesc': 'test description'});
+
     const [formState, setFormState] = useState({
         date: savedDate,
         startTime: savedStartTime,
         endTime: savedEndTime,
         project: savedProject,
-        // changed firstName to _id?
         employee: Auth.getProfile().data._id,
-        tasks: savedTasks,
+        tasks: tasks,
     });
 
     const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
-
-    const tasks = [];
-    tasks.push({'equipId': 'L65', 'taskDesc': 'test description'});
-    tasks.push({'equipId': 'L68', 'taskDesc': 'test description'});
-
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -47,7 +46,8 @@ const TimesheetForm = () => {
             const { data } = await addTimesheet({
             variables: { ...formState },
             });
-            console.log(data.addTimesheet.tasks);
+            // console.log({...formState});
+            // console.log(data.addTimesheet.tasks);
           handleChange();
         } catch (err) {
             console.error(err);
@@ -58,9 +58,8 @@ const TimesheetForm = () => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
-        console.log({ ...formState });
-        console.log(tasks);
-        console.log(name, value);
+        // console.log(tasks);
+        // console.log(name, value);
     };
 
     const { data: projectData } = useQuery(QUERY_PROJECTS, );
