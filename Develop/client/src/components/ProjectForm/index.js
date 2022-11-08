@@ -47,7 +47,6 @@ const ProjectForm = () => {
     };
 
     return (
-        <div>
             <form
                 className='project-form'
                 onSubmit={handleFormSubmit}
@@ -78,8 +77,7 @@ const ProjectForm = () => {
                 >
                     Add
                 </button>
-            </form>
-        </div>
+        </form>
     );
 };
 

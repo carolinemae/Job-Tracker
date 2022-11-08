@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskList from '../TaskList';
 
 const TimesheetList = ({ timesheets }) => {
     if (!timesheets.length) {
@@ -6,7 +7,7 @@ const TimesheetList = ({ timesheets }) => {
     }
 
     return (
-        <div className='center'>
+        <div>
             <table>
                 <tr>
                     <th>Date</th>
@@ -14,6 +15,7 @@ const TimesheetList = ({ timesheets }) => {
                     <th>Project</th>
                     <th>Start Time</th>
                     <th>End Time</th>
+                    <th>Tasks</th>
                     <th>Approved</th>
                 </tr>
                 {timesheets && timesheets.map((timesheet) => (
@@ -23,6 +25,9 @@ const TimesheetList = ({ timesheets }) => {
                         <td>{timesheet.project}</td>
                         <td>{timesheet.startTime}</td>
                         <td>{timesheet.endTime}</td>
+                        <td>
+                            <TaskList tasks={timesheet.tasks} />
+                        </td>
                         <td>{timesheet.approved}</td>
                     </tr>
                 ))}

@@ -20,7 +20,7 @@ const resolvers = {
       return Employee.findOne({ employee }).populate('timesheets');
     },
     timesheets: async () => {
-      return Timesheet.find().sort('date');
+      return Timesheet.find().sort({ date: -1 });
     },
     timesheet: async (parent, { timesheetId }) => {
       return Timesheet.findOne({ _id: timesheetId });
@@ -59,7 +59,12 @@ const resolvers = {
             startTime, 
             endTime, 
             project,
-            employee: context.employee.firstName 
+            employee: context.employee.firstName,
+            // tasks: 
+            //   {
+            //     equipId,
+            //     taskDesc,
+            //   }
           }
         );
 
@@ -68,10 +73,10 @@ const resolvers = {
           { $addToSet: { timesheets: timesheet._id } }
         );
 
-        await Project.findOneAndUpdate(
-          { _id: context.employee._id },
-          { $addToSet: { timesheets: timesheet._id } }
-        );
+        // await Project.findOneAndUpdate(
+        //   { _id: context.employee._id },
+        //   { $addToSet: { timesheets: timesheet._id } }
+        // );
 
         // await Project.findOneAndUpdate(
         //   { _id: context.employee._id },
@@ -82,15 +87,25 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    updateTimesheet: async (parent, { timesheetId, date, startTime, endTime, project }, context) => {
+      if (context.employee) {
+        return Timesheet.findOneAndUpdate(
+          { _id: timesheetId },
+          { $set: { date, startTime, endTime, project } },
+          // { new: true, runValidators: true, }
+        );
+      }
+      // throw new AuthenticationError('You need to be logged in!');
+    },
     removeTimesheet: async (parent, { timesheetId }) => {
       return Timesheet.findOneAndDelete({ _id: timesheetId });
     },
     addTask: async (parent, { timesheetId, equipId, taskDesc }) => {
-      return Timesheet.findOneAndUpdate(
-        { _id: timesheetId },
-        { $addToSet: { tasks: { equipId, taskDesc } } },
-        { new: true }
-      );
+        return Timesheet.findOneAndUpdate(
+          { _id: timesheetId },
+          { $addToSet: { tasks: { equipId, taskDesc } } },
+          { new: true, runValidators: true, }
+        );
     },
     // toggleApproved: async (parent, { timesheetId }, context) => {
     //   if (context.employee) {

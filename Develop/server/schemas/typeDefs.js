@@ -65,7 +65,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     createProject(projectName: String!, location: String!, description: String!): Project
     addEquipment(equipId: String!, equipName: String!): Equipment
-    addTimesheet(date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
+    addTimesheet(date: String, startTime: String, endTime: String, project: String): Timesheet
+    updateTimesheet(timesheetId: ID!, date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
     removeTimesheet(timesheetId: ID!): Timesheet
     addTask(timesheetId: ID!, equipId: String!, taskDesc: String!): Timesheet
     toggleApproved(timesheetId: ID!): Timesheet
@@ -73,30 +74,3 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-// type Query {
-//   timesheets(employee: ID, firstName:): [Timesheet]
-//   timesheet: Timesheet
-// }
-
-// type Mutation {
-//   addTimesheet(date: String!, startTime: String!, lunchStart: String!, lunchEnd: String!, endTime: String!): Auth
-// }
-
-// type Auth {
-//   timesheet: Timesheet
-// }
-
-// type Employee {
-//   timesheets: [Timesheet]
-// }
-
-// type Timesheet {
-//   _id: ID
-//   employee: Employee
-//   date: String
-//   startTime: String
-//   lunchStart: String
-//   lunchEnd: String
-//   endTime: String
-// }

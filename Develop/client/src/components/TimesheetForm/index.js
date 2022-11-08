@@ -12,22 +12,11 @@ const TimesheetForm = () => {
     const savedStartTime = localStorage.getItem('startTime');
     const savedEndTime = localStorage.getItem('endTime');
     const savedProject = localStorage.getItem('project');
-    const savedTasks = localStorage.getItem('tasks');
+    // const savedTasks = localStorage.getItem('tasks');
 
-    // Tests? Create timesheetId before adding tasks? How can this link up while timesheet is still being created?
-    const customId = (moment().format('YYYYMMDD') + Auth.getProfile().data.firstName.substring(0,3) + Auth.getProfile().data.lastName.substring(0,3));
-    if (moment().format('YYYY-MM-DD') === savedDate) {
-        // console.log('time matches')
-    } else {
-        // console.log('time does NOT match')
-    }
-    // console.log(customId);
-    // --------------------------------
-
-    // this is just a test
-    const tasks = [];
-    tasks.push({'equipId': 'L65', 'taskDesc': 'test description'});
-    tasks.push({'equipId': 'L68', 'taskDesc': 'test description'});
+    // const tasks = [];
+    // tasks.push({'equipId': 'L65', 'taskDesc': 'test description'});
+    // tasks.push({'equipId': 'L68', 'taskDesc': 'test description'});
 
     const [formState, setFormState] = useState({
         date: savedDate,
@@ -35,7 +24,6 @@ const TimesheetForm = () => {
         endTime: savedEndTime,
         project: savedProject,
         employee: Auth.getProfile().data._id,
-        tasks: tasks,
     });
 
     const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
@@ -44,11 +32,12 @@ const TimesheetForm = () => {
         event.preventDefault();
         try {
             const { data } = await addTimesheet({
-            variables: { ...formState },
+                variables: { ...formState },
             });
-            // console.log({...formState});
-            // console.log(data.addTimesheet.tasks);
-          handleChange();
+
+            const timesheetId = data.addTimesheet._id;
+            window.location.assign(`/timesheets/${timesheetId}`);
+
         } catch (err) {
             console.error(err);
         }
@@ -58,15 +47,10 @@ const TimesheetForm = () => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
-        // console.log(tasks);
-        // console.log(name, value);
     };
 
     const { data: projectData } = useQuery(QUERY_PROJECTS, );
     const projects = projectData?.projects || [];
-
-    const { data: equipmentData } = useQuery(QUERY_EQUIPMENT, );
-    const equipment = equipmentData?.equipment || [];
 
     return (
         <div className='center'>
@@ -138,46 +122,12 @@ const TimesheetForm = () => {
                         </option>
                     ))}
                 </select>
-
-                <div className='activity-span'>
-                    <select id='equipId' name='equipId' onChange={handleChange} value={formState.tasks}>
-                        <option>Select Equipment</option>
-                        {equipment && equipment.map((equipment) => (
-                            <option 
-                                name='equipment'
-                                key={equipment._id} 
-                                value={equipment.equipId}
-                            >
-                                {equipment.equipId}
-                            </option>
-                        ))}
-                    </select>
-                    <textarea></textarea>
-                </div>
-
-                <div className='activity-span'>
-                    <select id='equipId' name='equipId' onChange={handleChange} value={formState.tasks}>
-                        <option>Select Equipment</option>
-                        {equipment && equipment.map((equipment) => (
-                            <option 
-                                name='equipment'
-                                key={equipment._id} 
-                                value={equipment.equipId}
-                            >
-                                {equipment.equipId}
-                            </option>
-                        ))}
-                    </select>
-                    <textarea></textarea>
-                </div>
-
                 <div className='button-span'>
                     <button className='submit-timesheet' type='submit'>
                         Submit
                     </button>
                 </div>
             </form>
-
         </div>
     );
 };

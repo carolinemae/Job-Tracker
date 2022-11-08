@@ -10,6 +10,7 @@ import Projects from './pages/Projects';
 import Equipment from './pages/Equipment';
 import Employees from './pages/Employees';
 import Timesheets from './pages/Timesheets';
+import SingleTimesheet from './pages/SingleTimesheet';
 import CreateTimesheet from './pages/CreateTimesheet';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -72,6 +73,10 @@ function App() {
               <Route 
                 path="/timesheets" 
                 element={<Timesheets />} 
+              />
+              <Route 
+                path="/timesheets/:timesheetId" 
+                element={<SingleTimesheet />} 
               />
               <Route 
                 path="/create" 

@@ -9,20 +9,16 @@ const timesheetSchema = new Schema({
     },
     startTime: {
         type: String,
-        // required: true,
     },
     endTime: {
         type: String,
-        // required: true,
     },
     employee: {
         type: String,
-        // required: true,
         trim: true,
     },
     project: {
         type: String,
-        // required: true,
         trim: true,
     },
     approved: {

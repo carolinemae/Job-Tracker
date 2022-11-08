@@ -101,13 +101,18 @@ export const QUERY_TIMESHEETS = gql`
       employee
       approved
       project
+      tasks {
+        _id
+        equipId
+        taskDesc
+      }
     }
   }
 `;
 
 export const QUERY_TIMESHEET = gql`
   query timesheet($timesheetId: ID!) {
-    timesheet {
+    timesheet(timesheetId: $timesheetId) {
       _id
       date
       startTime
@@ -115,6 +120,11 @@ export const QUERY_TIMESHEET = gql`
       employee
       approved
       project
+      tasks {
+        _id
+        equipId
+        taskDesc
+      }
     }
   }
 `;
