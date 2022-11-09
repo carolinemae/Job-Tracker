@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_EMPLOYEE = gql`
-  query employee($firstName: String!, $lastName: String!) {
-    employee(firstName: $firstName, lastName: $lastName) {
+  query employee($employeeId: ID!) {
+    employee(employeeId: $employeeId) {
       _id
       firstName
       lastName
@@ -14,7 +14,9 @@ export const QUERY_EMPLOYEE = gql`
         startTime
         endTime
         project
+        approved
         tasks {
+          _id
           equipId
           taskDesc
         }
@@ -31,6 +33,19 @@ export const QUERY_EMPLOYEES = gql`
       lastName
       email
       admin
+      timesheets {
+        _id
+        date
+        startTime
+        endTime
+        project
+        approved
+        tasks {
+          _id
+          equipId
+          taskDesc
+        }
+      }
     }
   }
 `;
@@ -111,10 +126,7 @@ export const QUERY_TIMESHEETS = gql`
       endTime
       employee
       approved
-      project {
-        _id
-        projectName
-      }
+      project
       tasks {
         _id
         equipId
@@ -133,10 +145,7 @@ export const QUERY_TIMESHEET = gql`
       endTime
       employee
       approved
-      project {
-        _id
-        projectName
-      }
+      project
       tasks {
         _id
         equipId

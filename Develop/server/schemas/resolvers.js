@@ -16,8 +16,8 @@ const resolvers = {
     employees: async () => {
       return Employee.find().populate('timesheets');
     },
-    employee: async (parent, { employee }) => {
-      return Employee.findOne({ employee }).populate('timesheets');
+    employee: async (parent, { employeeId }) => {
+      return Employee.findOne({ _id: employeeId }).populate('timesheets');
     },
     timesheets: async () => {
       return Timesheet.find().sort({ date: -1 });
@@ -83,14 +83,13 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     updateTimesheet: async (parent, { timesheetId, date, startTime, endTime, project }, context) => {
-      // if (context.employee) {
-        console.log(project);
+      if (context.employee) {
         return Timesheet.findOneAndUpdate(
           { _id: timesheetId },
           { $set: { date, startTime, endTime, project } },
           // { new: true, runValidators: true, }
         );
-      // }
+      }
       // throw new AuthenticationError('You need to be logged in!');
     },
     removeTimesheet: async (parent, { timesheetId }) => {

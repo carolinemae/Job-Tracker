@@ -2,13 +2,18 @@ import React from 'react';
 
 const TaskList = ({ tasks = [] }) => {
     return(
-        <ul>
+        <div>
             {tasks && tasks.map((task) => (
-                <li key={task._id}>
-                    {task.equipId}: {task.taskDesc}
-                </li>
+                <div className='flex' key={task._id}>
+                    <p className='equip w-100'>
+                        {task.equipId}
+                    </p>
+                    <p>
+                        {task.taskDesc}
+                    </p>
+                </div>
             ))}
-        </ul>
+        </div>
     );
 };
 

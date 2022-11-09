@@ -2,8 +2,6 @@ import React from 'react';
 
 const ProjectList = ({ projects }) => {
 
-    console.log(projects);
-
     if (!projects.length) {
         return 'No Projects Yet';
     }

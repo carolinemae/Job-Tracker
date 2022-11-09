@@ -2,8 +2,6 @@ import React from 'react';
 import TaskList from '../TaskList';
 
 const TimesheetList = ({ timesheets }) => {
-    console.log(timesheets);
-
     if (!timesheets.length) {
         return 'No Timesheets Yet';
     }
@@ -24,7 +22,7 @@ const TimesheetList = ({ timesheets }) => {
                     <tr key={timesheet._id}>
                         <td>{timesheet.date}</td>
                         <td>{timesheet.employee}</td>
-                        <td>{timesheet.project.projectName}</td>
+                        <td>{timesheet.project}</td>
                         <td>{timesheet.startTime}</td>
                         <td>{timesheet.endTime}</td>
                         <td>

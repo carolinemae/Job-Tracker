@@ -60,16 +60,14 @@ export const ADD_TIMESHEET = gql`
 `;
 
 export const UPDATE_TIMESHEET = gql`
-  mutation updateTimesheet($timesheetId: ID!, $date: String!, $startTime: String!, $endTime: String!, $project: ID) {
+  mutation updateTimesheet($timesheetId: ID!, $date: String!, $startTime: String!, $endTime: String!, $project: String!) {
     updateTimesheet(timesheetId: $timesheetId, date: $date, startTime: $startTime, endTime: $endTime, project: $project) {
       _id
       date
       startTime
       endTime
       employee
-      project {
-        _id
-      }
+      project
       tasks {
         _id
         equipId

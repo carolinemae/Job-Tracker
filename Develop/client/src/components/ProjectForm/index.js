@@ -28,7 +28,6 @@ const ProjectForm = () => {
         event.preventDefault();
         try {
             const { data } = await createProject({ variables: { ...formState }, });
-            handleChange();
         } catch (err) {
             console.error(err);
         }

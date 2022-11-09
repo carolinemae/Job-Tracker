@@ -18,8 +18,8 @@ const timesheetSchema = new Schema({
         trim: true,
     },
     project: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project',
+        type: String,
+        trim: true,
     },
     approved: {
         type: Boolean,

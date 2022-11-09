@@ -5,6 +5,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import TaskList from '../TaskList';
 import Auth from '../../utils/auth';
 import moment from 'moment';
+import MyTimesheetList from '../../components/MyTimesheetList';
 
 const EditTimesheetForm = ({ timesheetId }) => {
     const savedDate = localStorage.getItem('date') || moment().format('YYYY-MM-DD');
@@ -36,10 +37,8 @@ const EditTimesheetForm = ({ timesheetId }) => {
                 const { data: newTask } = await addTask({
                     variables: { timesheetId, ...formState },
                 });
-            console.log(newTask);
 
             }
-            console.log(formState);
             const { data: updatedTimesheet } = await updateTimesheet({
                 variables: { timesheetId, ...formState },
             });
@@ -90,7 +89,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
                     <select id='projects' name='project' onChange={handleChange} value={formState.project}>
                         <option>Select Project</option>
                         {projects && projects.map((project) => (
-                            <option name='project' key={project._id} value={project._id}>
+                            <option name='project' key={project._id} value={project.projectName}>
                                 {project.projectName}
                             </option>
                         ))}
@@ -111,6 +110,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
                         Submit
                     </button>
                 </form>
+
                 </>
             ) : (
                 <>
