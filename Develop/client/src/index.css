@@ -1,6 +1,7 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
+  transition: all .4s ease;
 }
 
 header {
@@ -9,6 +10,10 @@ header {
 
 .logo {
   margin: 20px;
+}
+
+nav {
+  height: 30px;
 }
 
 .nav-span {
@@ -25,10 +30,20 @@ a {
 }
 
 a:hover {
+  border: 2px solid rgba(0, 0, 0, 0.192);
+  color: rgba(0, 0, 0, 0.397);
+}
+
+.nav-link {
+  margin: 0px 15px;
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.login {
   background-color: rgb(236, 198, 28);
 }
 
-.log {
+.signup {
   background-color: rgb(167, 167, 167);
 }
 
@@ -52,10 +67,52 @@ th {
 
 td {
   border: 1px solid rgba(0, 0, 0, 0.493);
-  padding: 5px 10px;
+}
+
+button {
+  background: white;
+  border: 1px solid green;
+  border-radius: 10px;
+  color: green;
+  padding: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 128, 0, 0.137);
+}
+
+.form-input {
+  background: white;
+  border: 1px solid green;
+  border-radius: 10px;
+  color: green;
+  margin: 5px;
+  padding: 5px;
+}
+
+.create-button {
+  padding: 5px;
+  margin: 10px;
 }
 
 .center {
   display: flex;
   justify-content: center;
+}
+
+.w-60 {
+  width: 60px;
+}
+
+.w-100 {
+  min-width: 100px;
+}
+
+.w-200 {
+  min-width: 200px;
+}
+
+.m-10 {
+  margin: 10px;
 }

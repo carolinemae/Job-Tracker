@@ -18,27 +18,27 @@ const Header = () => {
             </div>
             <div className='nav-span'>
                 <nav>
-                    <Link to='/'>Home</Link>
+                    <Link to='/' className='nav-link'>Home</Link>
                     {Auth.loggedIn() ? (
                     <>
-                        {Auth.checkAdmin() ? (
-                        <>
-                            <Link to='/projects'>Projects</Link>
-                            <Link to='/equipment'>Equipment</Link>
-                            <Link to='/employees'>Employees</Link>
-                            <Link to='/timesheets'>Timesheets</Link>
-                        </>
-                        ) : (
-                        <>
-                        </>
-                        )}
-                        <Link to='/create'>Create</Link>
-                        <Link onClick={logout} className='log'>Logout</Link>
-                        </>
+                    {Auth.checkAdmin() ? (
+                    <>
+                        <Link to='/projects' className='nav-link'>Projects</Link>
+                        <Link to='/equipment' className='nav-link'>Equipment</Link>
+                        <Link to='/employees' className='nav-link'>Employees</Link>
+                        <Link to='/timesheets' className='nav-link'>Timesheets</Link>
+                    </>
                     ) : (
                     <>
-                        <Link to='/login' className='log'>Login</Link>
-                        <Link to='/signup' className='log'>Signup</Link>
+                    </>
+                    )}
+                    {/* <Link to='/create' className='nav-link'>Create</Link> */}
+                    <Link onClick={logout} className='login nav-link'>Logout</Link>
+                    </>
+                    ) : (
+                    <>
+                    <Link to='/login' className='login nav-link'>Login</Link>
+                    <Link to='/signup' className='signup nav-link'>Signup</Link>
                     </>
                     )} 
                 </nav>

@@ -13,6 +13,11 @@ export const QUERY_EMPLOYEE = gql`
         date
         startTime
         endTime
+        project
+        tasks {
+          equipId
+          taskDesc
+        }
       }
     }
   }
@@ -44,6 +49,12 @@ export const QUERY_ME = gql`
         date
         startTime
         endTime
+        project
+        tasks {
+          _id
+          equipId
+          taskDesc
+        }
       }
     }
   }
@@ -100,7 +111,10 @@ export const QUERY_TIMESHEETS = gql`
       endTime
       employee
       approved
-      project
+      project {
+        _id
+        projectName
+      }
       tasks {
         _id
         equipId
@@ -119,7 +133,10 @@ export const QUERY_TIMESHEET = gql`
       endTime
       employee
       approved
-      project
+      project {
+        _id
+        projectName
+      }
       tasks {
         _id
         equipId

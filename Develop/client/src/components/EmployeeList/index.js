@@ -20,10 +20,12 @@ const EmployeeList = ({ employees }) => {
                 </tr>
                 {employees && employees.map((employee) => (
                     <tr key={employee._id}>
-                            <td>{employee.firstName}</td>
-                            <td>{employee.lastName}</td>
-                            <td>{employee.email}</td>
-                            <td><button onClick={toggleAdmin}>{employee.admin}</button></td>
+                            <td className='w-100'>{employee.firstName}</td>
+                            <td className='w-100'>{employee.lastName}</td>
+                            <td className='w-200'>{employee.email}</td>
+                            <td><button className='w-60' onClick={toggleAdmin}>
+                                {employee.admin}
+                            </button></td>
                     </tr>
                 ))}
             </table>

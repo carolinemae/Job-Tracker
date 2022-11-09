@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
 import { ADD_EMPLOYEE } from '../utils/mutations';
-
 import Auth from '../utils/auth';
 
 const Signup = () => {
@@ -18,10 +16,7 @@ const Signup = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    setFormState({ ...formState, [name]: value, });
   };
 
   const handleFormSubmit = async (event) => {
@@ -49,43 +44,11 @@ const Signup = () => {
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your firstname"
-                  name="firstName"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your lastname"
-                  name="lastName"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
+                <input className="form-input" placeholder="Your firstname" name="firstName" type="text" value={formState.name} onChange={handleChange} />
+                <input className="form-input" placeholder="Your lastname" name="lastName" type="text" value={formState.name} onChange={handleChange} />
+                <input className="form-input" placeholder="Your email" name="email" type="email" value={formState.email} onChange={handleChange} />
+                <input className="form-input" placeholder="******" name="password" type="password" value={formState.password} onChange={handleChange} />
+                <button type="submit" >
                   Submit
                 </button>
               </form>

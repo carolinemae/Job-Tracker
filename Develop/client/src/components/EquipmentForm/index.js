@@ -37,35 +37,15 @@ const EquipmentForm = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormState({
-            ...formState,
-            [name]: value,
-        });
+        setFormState({ ...formState, [name]: value, });
     };
 
     return (
-        <div>
-            <form
-                className='equipment-form'
-                onSubmit={handleFormSubmit}
-            >
-                <input
-                    name='equipId'
-                    placeholder='ID'
-                    type='text'
-                    value={formState.equipId}
-                    onChange={handleChange}
-                />
-                <input
-                    name='equipName'
-                    placeholder='Make & Model'
-                    type='text'
-                    value={formState.equipName}
-                    onChange={handleChange}
-                />
-                <button
-                    type='submit'
-                >
+        <div className='center'>
+            <form className='equipment-form m-10' onSubmit={handleFormSubmit}>
+                <input className='form-input w-60' name='equipId' placeholder='ID' type='text' value={formState.equipId} onChange={handleChange} />
+                <input className='form-input w-200' name='equipName' placeholder='Make & Model' type='text' value={formState.equipName} onChange={handleChange} />
+                <button className='w-60' type='submit'>
                     Add
                 </button>
             </form>

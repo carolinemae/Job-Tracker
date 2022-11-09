@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { ADD_TIMESHEET } from '../../utils/mutations';
 import { QUERY_PROJECTS } from '../../utils/queries';
-import { QUERY_EQUIPMENT } from '../../utils/queries';
-import moment from 'moment';
 import Auth from '../../utils/auth';
+import moment from 'moment';
 
 const TimesheetForm = () => {
     const savedDate = moment().format('YYYY-MM-DD') || localStorage.getItem('date');

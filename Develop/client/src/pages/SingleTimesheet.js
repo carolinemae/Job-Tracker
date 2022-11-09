@@ -7,9 +7,7 @@ import EditTimesheetForm from '../components/EditTimesheetForm';
 const SingleTimesheet = () => {
     const { timesheetId } = useParams();
 
-    const { data: timesheetData } = useQuery(QUERY_TIMESHEET, {
-        variables: { timesheetId: timesheetId },
-    });
+    const { data: timesheetData } = useQuery(QUERY_TIMESHEET, { variables: { timesheetId: timesheetId }, });
 
     const timesheet = timesheetData?.timesheet || [];
 

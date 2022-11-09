@@ -1,6 +1,9 @@
 import React from 'react';
 
 const ProjectList = ({ projects }) => {
+
+    console.log(projects);
+
     if (!projects.length) {
         return 'No Projects Yet';
     }
@@ -16,10 +19,10 @@ const ProjectList = ({ projects }) => {
                 </tr>
                 {projects && projects.map((project) => (
                     <tr key={project._id}>
-                            <td>{project.projectName}</td>
-                            <td>{project.location}</td>
-                            <td>{project.description}</td>
-                            <td>{project.active}</td>
+                            <td className='w-200'>{project.projectName}</td>
+                            <td className='w-200'>{project.location}</td>
+                            <td className='w-200'>{project.description}</td>
+                            <td className='w-60'>{project.active}</td>
                     </tr>
                 ))}
             </table>

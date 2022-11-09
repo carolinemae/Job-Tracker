@@ -1,8 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-
 import TimesheetList from '../components/TimesheetList';
-
 import { QUERY_TIMESHEETS } from '../utils/queries';
 
 const Timesheets = () => {
@@ -15,9 +13,7 @@ const Timesheets = () => {
                 <div>Loading...</div>
             ) : (
                 <>
-                <TimesheetList 
-                    timesheets={timesheets}
-                />
+                <TimesheetList timesheets={timesheets} />
                 </>
             )}
         </div>

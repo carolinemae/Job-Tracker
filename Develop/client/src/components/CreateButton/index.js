@@ -4,17 +4,14 @@ import { ADD_TIMESHEET } from '../../utils/mutations';
 
 const CreateButton = () => {
 
-    const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
+    const [addTimesheet] = useMutation(ADD_TIMESHEET);
 
     const handleCreate = async (event) => {
         event.preventDefault();
         try {
             const { data } = await addTimesheet();
-
-            console.log(data);
             const timesheetId = data.addTimesheet._id;
             window.location.assign(`/timesheets/${timesheetId}`);
-
         } catch (err) {
             console.error(err);
         }
@@ -22,7 +19,7 @@ const CreateButton = () => {
 
     return (
         <div className='center'>
-            <button onClick={handleCreate}>
+            <button onClick={handleCreate} className='create-button'>
                 Create New Timesheet
             </button>
         </div>

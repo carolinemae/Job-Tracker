@@ -16,9 +16,7 @@ const Equipment = () => {
                 <div>Loading...</div>
             ) : (
                 <>
-                <EquipmentList 
-                    equipment={equipment}
-                />
+                <EquipmentList equipment={equipment} />
                 <EquipmentForm />
                 </>
             )}

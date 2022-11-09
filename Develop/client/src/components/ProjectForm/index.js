@@ -27,10 +27,7 @@ const ProjectForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await createProject({
-                variables: { ...formState },
-            });
-
+            const { data } = await createProject({ variables: { ...formState }, });
             handleChange();
         } catch (err) {
             console.error(err);
@@ -39,45 +36,20 @@ const ProjectForm = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
-        setFormState({
-            ...formState,
-            [name]: value,
-        });
+        setFormState({ ...formState, [name]: value, });
     };
 
     return (
-            <form
-                className='project-form'
-                onSubmit={handleFormSubmit}
-            >
-                <input
-                    name='projectName'
-                    placeholder='New Project Name'
-                    type='text'
-                    value={formState.projectName}
-                    onChange={handleChange}
-                />
-                <input
-                    name='location'
-                    placeholder='Location'
-                    type='text'
-                    value={formState.location}
-                    onChange={handleChange}
-                />
-                <input
-                    name='description'
-                    placeholder='Description'
-                    type='text'
-                    value={formState.description}
-                    onChange={handleChange}
-                />
-                <button
-                    type='submit'
-                >
+        <div className='center'>
+            <form className='project-form m-10' onSubmit={handleFormSubmit}>
+                <input className='form-input w-200' name='projectName' placeholder='New Project Name' type='text' value={formState.projectName} onChange={handleChange} />
+                <input className='form-input w-200' name='location' placeholder='Location' type='text' value={formState.location} onChange={handleChange} />
+                <input className='form-input w-200' name='description' placeholder='Description' type='text' value={formState.description} onChange={handleChange} />
+                <button className='w-60' type='submit'>
                     Add
                 </button>
-        </form>
+            </form>
+        </div>
     );
 };
 

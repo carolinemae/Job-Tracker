@@ -24,7 +24,7 @@ const typeDefs = gql`
     endTime: String
     employee: String
     approved: String
-    project: String
+    project: Project
     tasks: [Task]!
   }
 
@@ -66,7 +66,7 @@ const typeDefs = gql`
     createProject(projectName: String!, location: String!, description: String!): Project
     addEquipment(equipId: String!, equipName: String!): Equipment
     addTimesheet(date: String, startTime: String, endTime: String, project: String): Timesheet
-    updateTimesheet(timesheetId: ID!, date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
+    updateTimesheet(timesheetId: ID!, date: String!, startTime: String!, endTime: String!, project: ID): Timesheet
     removeTimesheet(timesheetId: ID!): Timesheet
     addTask(timesheetId: ID!, equipId: String!, taskDesc: String!): Timesheet
     toggleApproved(timesheetId: ID!): Timesheet

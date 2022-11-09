@@ -1,9 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-
 import ProjectList from '../components/ProjectList';
 import ProjectForm from '../components/ProjectForm';
-
 import { QUERY_PROJECTS } from '../utils/queries';
 
 const Projects = () => {
@@ -16,9 +14,7 @@ const Projects = () => {
                 <div>Loading...</div>
             ) : (
                 <>
-                <ProjectList 
-                    projects={projects}
-                />
+                <ProjectList projects={projects} />
                 <ProjectForm />
                 </>
             )}

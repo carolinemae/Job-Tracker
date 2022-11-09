@@ -1,7 +1,7 @@
 import React from 'react';
 import Auth from '../utils/auth';
-import TimesheetForm from '../components/TimesheetForm';
 import CreateButton from '../components/CreateButton';
+import MyTimesheetList from '../components/MyTimesheetList';
 
 const Home = () => {
 return (
@@ -13,6 +13,7 @@ return (
             Hi, {Auth.getProfile().data.firstName} {Auth.getProfile().data.lastName}!
           </div>
           <CreateButton />
+          <MyTimesheetList />
           </>
         ) : (
           <>

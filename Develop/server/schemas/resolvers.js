@@ -78,23 +78,19 @@ const resolvers = {
         //   { $addToSet: { timesheets: timesheet._id } }
         // );
 
-        // await Project.findOneAndUpdate(
-        //   { _id: context.employee._id },
-        //   { $addToSet: { timesheets: timesheet._id } }
-        // );
-
         return timesheet;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     updateTimesheet: async (parent, { timesheetId, date, startTime, endTime, project }, context) => {
-      if (context.employee) {
+      // if (context.employee) {
+        console.log(project);
         return Timesheet.findOneAndUpdate(
           { _id: timesheetId },
           { $set: { date, startTime, endTime, project } },
           // { new: true, runValidators: true, }
         );
-      }
+      // }
       // throw new AuthenticationError('You need to be logged in!');
     },
     removeTimesheet: async (parent, { timesheetId }) => {
