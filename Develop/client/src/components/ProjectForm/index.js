@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_PROJECT } from '../../utils/mutations';
 import { QUERY_PROJECTS } from '../../utils/queries';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const ProjectForm = () => {
     const [formState, setFormState] = useState({
@@ -39,16 +41,20 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className='center'>
-            <form className='project-form m-10' onSubmit={handleFormSubmit}>
-                <input className='form-input w-200' name='projectName' placeholder='New Project Name' type='text' value={formState.projectName} onChange={handleChange} />
-                <input className='form-input w-200' name='location' placeholder='Location' type='text' value={formState.location} onChange={handleChange} />
-                <input className='form-input w-200' name='description' placeholder='Description' type='text' value={formState.description} onChange={handleChange} />
-                <button className='w-60' type='submit'>
-                    Add
-                </button>
-            </form>
-        </div>
+        <Form className='project-form'>
+            <Form.Group>
+                <Form.Control type="text" name='projectName' placeholder="New Project Name" value={formState.projectName} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Control type="text" name='location' placeholder="Location" value={formState.location} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Control type="text" name='description' placeholder="Description" value={formState.description} onChange={handleChange} />
+            </Form.Group>
+            <Button variant="dark" type="submit">
+                Add
+            </Button>
+        </Form>
     );
 };
 

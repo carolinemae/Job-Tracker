@@ -1,4 +1,5 @@
 import React from 'react';
+import Table from 'react-bootstrap/Table';
 
 const EquipmentList = ({ equipment }) => {
     if (!equipment.length) {
@@ -6,20 +7,22 @@ const EquipmentList = ({ equipment }) => {
     }
 
     return (
-        <div className='center'>
-            <table>
+        <Table striped bordered hover size="sm">
+            <thead>
                 <tr>
                     <th>ID #</th>
                     <th>Equipment Make & Model</th>
                 </tr>
+            </thead>
+            <tbody>
                 {equipment && equipment.map((equipment) => (
                     <tr key={equipment._id}>
                         <td className='w-60'>{equipment.equipId}</td>
                         <td className='w-200'>{equipment.equipName}</td>
                     </tr>
                 ))}
-            </table>
-        </div>
+            </tbody>
+        </Table>
     );
 };
 

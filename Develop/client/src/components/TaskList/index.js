@@ -5,7 +5,7 @@ const TaskList = ({ tasks = [] }) => {
         <div>
             {tasks && tasks.map((task) => (
                 <div className='flex' key={task._id}>
-                    <p className='equip w-100'>
+                    <p>
                         {task.equipId}
                     </p>
                     <p>

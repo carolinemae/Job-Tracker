@@ -1,4 +1,44 @@
 :root {
+  --grey: rgba(199, 196, 194, 0.5);
+}
+
+.card {
+  margin: 20px 0px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.greeting, .create-button {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.h5 {
+  font-size: large;
+}
+
+.table {
+  margin: 20px 0px;
+}
+
+.project-form, .equip-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* :root {
   --green: rgb(27, 165, 27);
   --yellow: rgb(236, 198, 28);
   --grey: rgb(167, 167, 167);
@@ -170,4 +210,4 @@ button:hover {
 
 .pr-20 {
   padding-right: 20px;
-}
+} */

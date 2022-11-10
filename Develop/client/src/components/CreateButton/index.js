@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TIMESHEET } from '../../utils/mutations';
+import Button from 'react-bootstrap/Button';
 
 const CreateButton = () => {
 
@@ -18,10 +19,8 @@ const CreateButton = () => {
     };
 
     return (
-        <div className='center'>
-            <button onClick={handleCreate} className='create-button'>
-                Create New Timesheet
-            </button>
+        <div className='create-button'>
+            <Button variant="dark" onClick={handleCreate}>Create New Timesheet</Button>
         </div>
     );
 };

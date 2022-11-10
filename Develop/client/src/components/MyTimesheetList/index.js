@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import TaskList from '../TaskList';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const MyTimesheetList = () => {
     const employeeId = Auth.getProfile().data._id;
@@ -13,26 +15,26 @@ const MyTimesheetList = () => {
     const myTimesheets = data?.employee.timesheets || [];
 
     return (
-        <div className='flex column'>
+        <div>
             {myTimesheets && myTimesheets.map((timesheet) => (
-                <div className='timesheet-card' key={timesheet._id}>
-                    <div className='flex space-between'>
-                        <div className='flex'>
-                            <p className='pr-20 bigger green'>{timesheet.date}</p>
-                        </div>
-                        {timesheet.approved ? (
-                        <>
-                        <div>
-                            <Link to={`/timesheets/${timesheet._id}`}><FontAwesomeIcon icon={faPenToSquare} /></Link>
-                        </div>
-                        </>
-                        ) : (
-                        <></>
-                        )}
-                    </div>
-                    <p className='time pr-20'>{timesheet.project} {timesheet.startTime} - {timesheet.endTime}</p>
-                    <TaskList tasks={timesheet.tasks} />
-                </div>
+                <Card>
+                    <Card.Header>
+                        {timesheet.date}
+                        <Button href={`/timesheets/${timesheet._id}`} variant="light">
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{timesheet.project}</Card.Title>
+                        <Card.Text>
+                            {timesheet.startTime} - {timesheet.endTime}
+                        </Card.Text>
+                        <Card.Text>
+                            <TaskList tasks={timesheet.tasks} />
+                        </Card.Text>
+                        
+                    </Card.Body>
+                </Card>
             ))}
         </div>
     );

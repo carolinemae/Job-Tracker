@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_EQUIPMENT } from '../../utils/mutations';
 import { QUERY_EQUIPMENT } from '../../utils/queries';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const EquipmentForm = () => {
     const [formState, setFormState] = useState({
@@ -41,15 +43,17 @@ const EquipmentForm = () => {
     };
 
     return (
-        <div className='center'>
-            <form className='equipment-form m-10' onSubmit={handleFormSubmit}>
-                <input className='form-input w-60' name='equipId' placeholder='ID' type='text' value={formState.equipId} onChange={handleChange} />
-                <input className='form-input w-200' name='equipName' placeholder='Make & Model' type='text' value={formState.equipName} onChange={handleChange} />
-                <button className='w-60' type='submit'>
-                    Add
-                </button>
-            </form>
-        </div>
+        <Form className='equip-form'>
+            <Form.Group>
+                <Form.Control type="text" name='equipId' placeholder='ID' value={formState.equipId} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Control type="text" name='equipName' placeholder='Make & Model' value={formState.equipName} onChange={handleChange} />
+            </Form.Group>
+            <Button variant="dark" type="submit">
+                Add
+            </Button>
+        </Form>
     );
 };
 
