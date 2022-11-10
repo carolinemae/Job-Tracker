@@ -6,6 +6,7 @@ import { QUERY_TIMESHEETS } from '../utils/queries';
 const Timesheets = () => {
     const { loading, data } = useQuery(QUERY_TIMESHEETS);
     const timesheets = data?.timesheets || [];
+    console.log(timesheets);
 
     return (
         <div>

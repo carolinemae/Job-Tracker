@@ -5,13 +5,18 @@ import { useQuery, useMutation } from '@apollo/client';
 import TaskList from '../TaskList';
 import Auth from '../../utils/auth';
 import moment from 'moment';
-import MyTimesheetList from '../../components/MyTimesheetList';
 
 const EditTimesheetForm = ({ timesheetId }) => {
-    const savedDate = localStorage.getItem('date') || moment().format('YYYY-MM-DD');
-    const savedStartTime = localStorage.getItem('startTime');
+
+    const { data: timesheetData } = useQuery(QUERY_TIMESHEET, { variables: { timesheetId: timesheetId }, });
+    const timesheet = timesheetData?.timesheet || [];
+
+    const savedDate = moment().format('YYYY-MM-DD');
+    const savedStartTime = timesheet.startTime || localStorage.getItem('startTime');
     const savedEndTime = localStorage.getItem('endTime');
     const savedProject = localStorage.getItem('project');
+
+    console.log(timesheet.startTime);
 
     const [formState, setFormState] = useState({
         date: savedDate,
@@ -21,9 +26,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
         equipId: '',
         taskDesc: '',
     });
-
-    const { data: timesheetData } = useQuery(QUERY_TIMESHEET, { variables: { timesheetId: timesheetId }, });
-    const timesheet = timesheetData?.timesheet || [];
 
     const [updateTimesheet] = useMutation(UPDATE_TIMESHEET);
     const [addTask] = useMutation(ADD_TASK);
@@ -37,7 +39,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
                 const { data: newTask } = await addTask({
                     variables: { timesheetId, ...formState },
                 });
-
+                console.log({ ...formState });
             }
             const { data: updatedTimesheet } = await updateTimesheet({
                 variables: { timesheetId, ...formState },

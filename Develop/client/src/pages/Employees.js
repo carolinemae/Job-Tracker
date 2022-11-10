@@ -9,6 +9,7 @@ import { QUERY_EMPLOYEES } from '../utils/queries';
 const Employees = () => {
     const { loading, data } = useQuery(QUERY_EMPLOYEES);
     const employees = data?.employees || [];
+    console.log(data?.employees);
 
     return (
         <div>

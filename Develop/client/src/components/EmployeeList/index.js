@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { TOGGLE_ADMIN } from '../../utils/mutations';
 
 const EmployeeList = ({ employees }) => {
+    const [toggleState, setToggleState] = useState({ admin: true });
+    const [toggleAdmin] = useMutation(TOGGLE_ADMIN);
+    
     if (!employees.length) {
         return 'No Employees Yet';
     }
 
-    const toggleAdmin = (event) => {
+    const handleToggle = async (event) => {
         event.preventDefault();
-    };
+        try {
+            const employeeId = event.target.id;
+            if (event.target.value === false) {
+                setToggleState({ admin: true });
+                event.target.value = true;
+            } else {
+                setToggleState({ admin: false });
+                event.target.value = false;
+            }
+            const { data } = await toggleAdmin({
+                variables: { employeeId, ...toggleState },
+            });
+            console.log({...toggleState});
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     return (
         <div className='center'>
@@ -23,7 +44,7 @@ const EmployeeList = ({ employees }) => {
                             <td className='w-100'>{employee.firstName}</td>
                             <td className='w-100'>{employee.lastName}</td>
                             <td className='w-200'>{employee.email}</td>
-                            <td><button className='w-60' onClick={toggleAdmin}>
+                            <td><button className='w-60' onClick={handleToggle} id={employee._id} value={employee.admin}>
                                 {employee.admin}
                             </button></td>
                     </tr>

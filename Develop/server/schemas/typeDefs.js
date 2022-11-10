@@ -69,7 +69,8 @@ const typeDefs = gql`
     updateTimesheet(timesheetId: ID!, date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
     removeTimesheet(timesheetId: ID!): Timesheet
     addTask(timesheetId: ID!, equipId: String!, taskDesc: String!): Timesheet
-    toggleApproved(timesheetId: ID!): Timesheet
+    toggleApproved(timesheetId: ID!, approved: Boolean!): Timesheet
+    toggleAdmin(employeeId: ID!, admin: Boolean!): Employee
   }
 `;
 

@@ -17,7 +17,7 @@ const resolvers = {
       return Employee.find().populate('timesheets');
     },
     employee: async (parent, { employeeId }) => {
-      return Employee.findOne({ _id: employeeId }).populate('timesheets');
+      return Employee.findOne({ _id: employeeId }).populate({ path: 'timesheets', options: { sort: { 'date': -1 } } });
     },
     timesheets: async () => {
       return Timesheet.find().sort({ date: -1 });
@@ -102,14 +102,22 @@ const resolvers = {
           { new: true, runValidators: true, }
         );
     },
-    // toggleApproved: async (parent, { timesheetId }, context) => {
-    //   if (context.employee) {
-    //     return Timesheet.findOneAndUpdate(
-    //       { _id: timesheetId },
-    //       { approved: true }
-    //     );
-    //   }
-    // },
+    toggleApproved: async (parent, { timesheetId, approved }, context) => {
+      if (context.employee) {
+        return Timesheet.findOneAndUpdate(
+          { _id: timesheetId },
+          { $set: { approved: approved } }
+        );
+      }
+    },
+    toggleAdmin: async (parent, { employeeId, admin }, context) => {
+      if (context.employee.admin) {
+        return Employee.findOneAndUpdate(
+          { _id: employeeId },
+          { $set: { admin: admin } }
+        );
+      }
+    },
     login: async (parent, { email, password }) => {
       const employee = await Employee.findOne({ email });
 

@@ -95,3 +95,21 @@ export const ADD_TASK = gql`
     }
   }
 `;
+
+export const TOGGLE_APPROVED = gql`
+  mutation toggleApproved($timesheetId: ID!, $approved: Boolean!) {
+    toggleApproved(timesheetId: $timesheetId, approved: $approved) {
+      _id
+      approved
+    }
+  }
+`;
+
+export const TOGGLE_ADMIN = gql`
+  mutation toggleAdmin($employeeId: ID!, $admin: Boolean!) {
+    toggleAdmin(employeeId: $employeeId, admin: $admin) {
+      _id
+      admin
+    }
+  }
+`;
