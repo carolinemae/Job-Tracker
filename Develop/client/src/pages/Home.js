@@ -17,7 +17,9 @@ return (
           </>
         ) : (
           <>
+          <div className='greeting'>
             You must be logged in.
+          </div>
           </>
         )}
       </div>

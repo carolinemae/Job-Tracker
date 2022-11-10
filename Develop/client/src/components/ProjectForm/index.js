@@ -51,7 +51,7 @@ const ProjectForm = () => {
             <Form.Group>
                 <Form.Control type="text" name='description' placeholder="Description" value={formState.description} onChange={handleChange} />
             </Form.Group>
-            <Button variant="dark" type="submit">
+            <Button variant="dark" type="submit" onClick={handleFormSubmit}>
                 Add
             </Button>
         </Form>

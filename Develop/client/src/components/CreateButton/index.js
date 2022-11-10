@@ -20,7 +20,7 @@ const CreateButton = () => {
 
     return (
         <div className='create-button'>
-            <Button variant="dark" onClick={handleCreate}>Create New Timesheet</Button>
+            <Button name='create-button' variant="dark" onClick={handleCreate}>Create New Timesheet</Button>
         </div>
     );
 };

@@ -5,10 +5,10 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     projects: async () => {
-      return Project.find();
+      return Project.find().populate('timesheets');
     },
     project: async (parent, { projectId }) => {
-      return Project.findOne({ _id: projectId });
+      return Project.findOne({ _id: projectId }).populate({ path: 'timesheets', options: { sort: { 'date': -1 } } });
     },
     equipment: async () => {
       return Equipment.find();

@@ -50,7 +50,7 @@ const EquipmentForm = () => {
             <Form.Group>
                 <Form.Control type="text" name='equipName' placeholder='Make & Model' value={formState.equipName} onChange={handleChange} />
             </Form.Group>
-            <Button variant="dark" type="submit">
+            <Button variant="dark" type="submit" onClick={handleFormSubmit}>
                 Add
             </Button>
         </Form>

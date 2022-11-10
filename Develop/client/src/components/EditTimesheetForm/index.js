@@ -16,8 +16,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
     const savedEndTime = localStorage.getItem('endTime');
     const savedProject = localStorage.getItem('project');
 
-    console.log(timesheet.startTime);
-
     const [formState, setFormState] = useState({
         date: savedDate,
         startTime: savedStartTime,
@@ -39,7 +37,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
                 const { data: newTask } = await addTask({
                     variables: { timesheetId, ...formState },
                 });
-                console.log({ ...formState });
+                console.log(formState.project);
             }
             const { data: updatedTimesheet } = await updateTimesheet({
                 variables: { timesheetId, ...formState },
@@ -54,10 +52,11 @@ const EditTimesheetForm = ({ timesheetId }) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
+        console.log({ name, value });
       };
 
-    const { data: projectData } = useQuery(QUERY_PROJECTS);
-    const projects = projectData?.projects || [];
+    const { data: projectsData } = useQuery(QUERY_PROJECTS);
+    const projects = projectsData?.projects || [];
 
     const { data: equipmentData } = useQuery(QUERY_EQUIPMENT);
     const equipment = equipmentData?.equipment || [];

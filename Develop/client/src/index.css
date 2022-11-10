@@ -2,6 +2,10 @@
   --grey: rgba(199, 196, 194, 0.5);
 }
 
+.nav-link {
+  font-weight: 500;
+}
+
 .card {
   margin: 20px 0px;
 }
@@ -11,6 +15,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px 15px;
+  background-color: #343a40;
+  color: white;
+  font-weight: 600;
+  font-size: larger;
 }
 
 .card-body {
@@ -20,6 +28,7 @@
 .greeting, .create-button {
   text-align: center;
   margin: 10px 0px;
+  font-weight: 500;
 }
 
 .h5 {

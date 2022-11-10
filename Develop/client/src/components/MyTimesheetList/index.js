@@ -20,7 +20,7 @@ const MyTimesheetList = () => {
                 <Card>
                     <Card.Header>
                         {timesheet.date}
-                        <Button href={`/timesheets/${timesheet._id}`} variant="light">
+                        <Button href={`/timesheets/${timesheet._id}`} variant="dark">
                             <FontAwesomeIcon icon={faPenToSquare} />
                         </Button>
                     </Card.Header>

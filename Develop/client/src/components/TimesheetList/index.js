@@ -12,6 +12,8 @@ const TimesheetList = ({ timesheets }) => {
         return 'No Timesheets Yet';
     }
 
+    console.log(timesheets);
+
     const handleToggle = async (event) => {
         event.preventDefault();
         try {
