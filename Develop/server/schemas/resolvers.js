@@ -53,7 +53,6 @@ const resolvers = {
     },
     addTimesheet: async (parent, { date, startTime, endTime, project }, context) => {
       if (context.employee) {
-        console.log(project);
         const timesheet = await Timesheet.create(
           { 
             date, 
