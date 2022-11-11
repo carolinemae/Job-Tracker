@@ -5,7 +5,12 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-return (
+  if (Auth.loggedIn()) {
+  } else {
+    window.location.assign('/login');
+  }
+
+  return (
     <main>
       <div>
         {Auth.loggedIn() ? (
