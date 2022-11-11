@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_EMPLOYEE } from '../utils/mutations';
 import Auth from '../utils/auth';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -32,37 +34,27 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input className="form-input" placeholder="Your firstname" name="firstName" type="text" value={formState.name} onChange={handleChange} />
-                <input className="form-input" placeholder="Your lastname" name="lastName" type="text" value={formState.name} onChange={handleChange} />
-                <input className="form-input" placeholder="Your email" name="email" type="email" value={formState.email} onChange={handleChange} />
-                <input className="form-input" placeholder="******" name="password" type="password" value={formState.password} onChange={handleChange} />
-                <button type="submit" >
-                  Submit
-                </button>
-              </form>
-            )}
-
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </main>
+    <Form className='login-form' onSubmit={handleFormSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Label>First name</Form.Label>
+        <Form.Control name='firstName' type="text" placeholder="Your first name" value={formState.firstName} onChange={handleChange}/>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Last name</Form.Label>
+        <Form.Control name='lastName' type="text" placeholder="Your last name" value={formState.lastName} onChange={handleChange}/>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control name='email' type="email" placeholder="Enter email" value={formState.email} onChange={handleChange}/>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Password</Form.Label>
+        <Form.Control name='password' type="password" placeholder="Password" value={formState.password} onChange={handleChange}/>
+      </Form.Group>
+      <Button className='signup-btn' variant="dark" type="submit">
+        Signup
+      </Button>
+    </Form>
   );
 };
 

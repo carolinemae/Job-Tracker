@@ -53,18 +53,14 @@ const resolvers = {
     },
     addTimesheet: async (parent, { date, startTime, endTime, project }, context) => {
       if (context.employee) {
+        console.log(project);
         const timesheet = await Timesheet.create(
           { 
             date, 
             startTime, 
             endTime, 
             project,
-            employee: context.employee.firstName,
-            // tasks: 
-            //   {
-            //     equipId,
-            //     taskDesc,
-            //   }
+            employee: context.employee.firstName + ' ' + context.employee.lastName,
           }
         );
 
@@ -73,10 +69,11 @@ const resolvers = {
           { $addToSet: { timesheets: timesheet._id } }
         );
 
-        // await Project.findOneAndUpdate(
-        //   { _id: context.employee._id },
-        //   { $addToSet: { timesheets: timesheet._id } }
-        // );
+        await Project.findOneAndUpdate(
+          { projectName: project },
+          { $addToSet: { timesheets: timesheet._id } },
+          { new: true, runValidators: true, }
+        );
 
         return timesheet;
       }
@@ -84,15 +81,20 @@ const resolvers = {
     },
     updateTimesheet: async (parent, { timesheetId, date, startTime, endTime, project }, context) => {
       if (context.employee) {
-        return Timesheet.findOneAndUpdate(
+        await Timesheet.findOneAndUpdate(
           { _id: timesheetId },
           { $set: { date, startTime, endTime, project } },
-          // { new: true, runValidators: true, }
+        );
+
+        await Project.findOneAndUpdate(
+          { projectName: project },
+          { $addToSet: { timesheets: timesheetId } },
+          { new: true, runValidators: true, }
         );
       }
-      // throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
-    removeTimesheet: async (parent, { timesheetId }) => {
+    deleteTimesheet: async (parent, { timesheetId }) => {
       return Timesheet.findOneAndDelete({ _id: timesheetId });
     },
     addTask: async (parent, { timesheetId, equipId, taskDesc }) => {

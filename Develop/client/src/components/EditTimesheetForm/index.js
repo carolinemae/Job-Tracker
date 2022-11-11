@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QUERY_PROJECTS, QUERY_EQUIPMENT, QUERY_TIMESHEET } from '../../utils/queries';
-import { UPDATE_TIMESHEET, ADD_TASK } from '../../utils/mutations';
+import { UPDATE_TIMESHEET, DELETE_TIMESHEET, ADD_TASK } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 import TaskList from '../TaskList';
 import Auth from '../../utils/auth';
 import moment from 'moment';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import { Link } from 'react-router-dom';
+import LoadingScreen from '../LoadingScreen';
 
 const EditTimesheetForm = ({ timesheetId }) => {
 
-    const { data: timesheetData } = useQuery(QUERY_TIMESHEET, { variables: { timesheetId: timesheetId }, });
-    const timesheet = timesheetData?.timesheet || [];
-
-    const savedDate = moment().format('YYYY-MM-DD');
-    const savedStartTime = timesheet.startTime || localStorage.getItem('startTime');
+    const savedDate = localStorage.getItem('date') || moment().format('YYYY-MM-DD');
+    const savedStartTime = localStorage.getItem('startTime');
     const savedEndTime = localStorage.getItem('endTime');
     const savedProject = localStorage.getItem('project');
 
@@ -25,11 +27,41 @@ const EditTimesheetForm = ({ timesheetId }) => {
         taskDesc: '',
     });
 
+    const { loading, data: timesheetData } = useQuery(QUERY_TIMESHEET, 
+        { variables: { timesheetId: timesheetId }, },
+        // { onCompleted: setFormState },
+    );
+    const timesheet = timesheetData?.timesheet || [];
+
+    console.log(timesheet);
+
+    // useEffect(() => {
+    //     setFormState({
+    //         startTime: timesheet.startTime,
+    //     })
+    // }, []);
+
     const [updateTimesheet] = useMutation(UPDATE_TIMESHEET);
+    const [deleteTimesheet] = useMutation(DELETE_TIMESHEET);
     const [addTask] = useMutation(ADD_TASK);
 
+    const [showModal, setShowModal] = useState(false);
+
+    const modalDisplay = () => {
+        setShowModal(current => !current);
+    }
+
+    const handleDelete = async (event) => {
+        try {
+            await deleteTimesheet({ variables: { timesheetId } });
+            window.location.assign('/');
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         try {
             const equipId = {...formState}.equipId;
             const taskDesc = {...formState}.taskDesc;
@@ -37,12 +69,11 @@ const EditTimesheetForm = ({ timesheetId }) => {
                 const { data: newTask } = await addTask({
                     variables: { timesheetId, ...formState },
                 });
-                console.log(formState.project);
             }
             const { data: updatedTimesheet } = await updateTimesheet({
                 variables: { timesheetId, ...formState },
             });
-
+            setFormState({ taskDesc: '' });
         } catch (err) {
             console.error(err);
         }
@@ -52,8 +83,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
-        console.log({ name, value });
-      };
+    };
 
     const { data: projectsData } = useQuery(QUERY_PROJECTS);
     const projects = projectsData?.projects || [];
@@ -62,63 +92,80 @@ const EditTimesheetForm = ({ timesheetId }) => {
     const equipment = equipmentData?.equipment || [];
 
     return (
-        <div className='center'>
-            {Auth.loggedIn() ? (
+        <div>
+            {loading ? (
                 <>
-                <form onSubmit={handleFormSubmit}>
-                    <div className='date-span'>
-                        <label for='date' className='form-label'>
-                            Date
-                        </label>
-                        <input name='date' type='date' value={formState.date} className='form-input' onChange={handleChange} />
-                    </div>
-                    <div className='start-time-span'>
-                        <label for='startTime' className='form-label'>
-                            Start Time
-                        </label>
-                        <input name='startTime' type='time' value={formState.startTime} className='form-input' onChange={handleChange}/>
-                    </div>
-                    <div className='end-time-span'>
-                        <label for='endTime' className='form-label'>
-                            End Time
-                        </label>
-                        <input name='endTime' type='time' value={formState.endTime} className='form-input' onChange={handleChange}/>
-                    </div>
-                    <label for='project' className='form-label'>
-                        Project
-                    </label>
-                    <select id='projects' name='project' onChange={handleChange} value={formState.project}>
-                        <option>Select Project</option>
-                        {projects && projects.map((project) => (
-                            <option name='project' key={project._id} value={project.projectName}>
-                                {project.projectName}
-                            </option>
-                        ))}
-                    </select>
-
-                    <TaskList tasks={timesheet.tasks} />
-
-                    <select id='equipId' name='equipId' onChange={handleChange} value={formState.equipId}>
-                        <option>Select Equipment</option>
-                        {equipment && equipment.map((equipment) => (
-                            <option name='equipment' key={equipment._id} value={equipment.equipId}>
-                                {equipment.equipId}
-                            </option>
-                        ))}
-                    </select>
-                    <textarea name='taskDesc' onChange={handleChange} value={formState.taskDesc} placeholder='Tasks...'></textarea>
-                    <button className='submit-timesheet' type='submit'>
-                        Submit
-                    </button>
-                </form>
-
+                <LoadingScreen />
                 </>
             ) : (
                 <>
-                You need to be logged in.
-                </>   
+                <Form className='edit-form' onSubmit={handleFormSubmit}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Date</Form.Label>
+                        <Form.Control type="date" name='date' value={formState.date} onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Start Time</Form.Label>
+                        <Form.Control type="time" name='startTime' value={formState.startTime} onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>End Time</Form.Label>
+                        <Form.Control type="time" name='endTime' value={formState.endTime} onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Project</Form.Label>
+                        <Form.Text className='fixed-form-text'>{timesheet.project}</Form.Text>
+                        {/* <Form.Select className='form-control' type="select" name='project' value={formState.project} onChange={handleChange}>
+                            <option>Select Project</option>
+                                {projects && projects.map((project) => (
+                                    <option name='project' key={project._id} value={project.projectName}>
+                                        {project.projectName}
+                                    </option>
+                                ))}
+                        </Form.Select> */}
+                    </Form.Group>
+                    <TaskList tasks={timesheet.tasks} />
+                    <Form.Group className="mb-3">
+                        <Form.Label>Equipment</Form.Label>
+                        <Form.Select className='form-control mb-3' type="select" name='equipId' value={formState.equipId} onChange={handleChange}>
+                            <option>Add equipment...</option>
+                                {equipment && equipment.map((equipment) => (
+                                    <option name='project' key={equipment._id} value={equipment.equipId}>
+                                        {equipment.equipId}
+                                    </option>
+                                ))}
+                        </Form.Select>
+                        <Form.Label>Tasks</Form.Label>
+                        <Form.Control type="textarea" name='taskDesc' placeholder='Add tasks...' value={formState.taskDesc} onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="center">
+                        <Button variant="danger" onClick={modalDisplay}>
+                            Delete
+                        </Button>
+                        <Button variant="dark" type="submit">
+                            Update
+                        </Button>
+                        <Link to='/'>
+                            <Button variant="dark">
+                                Close
+                            </Button>
+                        </Link>
+                    </Form.Group>
+                </Form>
+
+                <Modal show={showModal}>
+                    <Modal.Body>
+                        <p>Are you sure you want to delete this timesheet?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="dark" onClick={modalDisplay}>Cancel</Button>
+                        <Button variant="danger" onClick={handleDelete}>Delete</Button>
+                    </Modal.Footer>
+                </Modal>
+                </>
             )}
         </div>
+
     )
 
 };

@@ -1,5 +1,14 @@
 :root {
-  --grey: rgba(199, 196, 194, 0.5);
+  --green: rgb(27, 165, 27);
+
+}
+
+* {
+  transition: all .2s ease;
+}
+
+.navbar-collapse {
+  justify-content: end;
 }
 
 .nav-link {
@@ -8,6 +17,7 @@
 
 .card {
   margin: 20px 0px;
+  border: 1px solid rgb(0 0 0 / 51%);
 }
 
 .card-header {
@@ -45,7 +55,82 @@
   justify-content: center;
 }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
 
+.btn {
+  margin: 5px;
+}
+
+.login-btn {
+  width: 100px;
+}
+
+.create-form, .edit-form {
+  margin-top: 30px;
+}
+
+.equip-id {
+  width: 100px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.modal-dialog {
+  top: 40vh;
+}
+
+.fixed-form-text {
+  font-size: initial;
+  padding: 0px 5px;
+}
+
+.loading {
+  display: block;
+  position: fixed;
+  height: 100px;
+  top: 45vh;
+}
+
+.timesheet-emp {
+  margin: 0;
+  font-weight: 400;
+}
+
+.fa-circle-check {
+  width: 25px;
+  height: 25px;
+}
+
+.approve-timesheet {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my-btn {
+  margin: 0;
+  padding: 0;
+  color: #343a40;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+}
+
+.my-btn:hover {
+  color: var(--green);
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+}
 
 /* :root {
   --green: rgb(27, 165, 27);

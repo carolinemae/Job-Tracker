@@ -8,14 +8,21 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import TaskList from '../TaskList';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import LoadingScreen from '../LoadingScreen';
 
 const MyTimesheetList = () => {
     const employeeId = Auth.getProfile().data._id;
-    const { data } = useQuery(QUERY_EMPLOYEE, { variables: { employeeId: employeeId }, })
+    const { loading, data } = useQuery(QUERY_EMPLOYEE, { variables: { employeeId: employeeId }, })
     const myTimesheets = data?.employee.timesheets || [];
 
     return (
         <div>
+            {loading ? (
+            <>
+            <LoadingScreen />
+            </>
+            ) : (
+            <>
             {myTimesheets && myTimesheets.map((timesheet) => (
                 <Card>
                     <Card.Header>
@@ -32,10 +39,11 @@ const MyTimesheetList = () => {
                         <Card.Text>
                             <TaskList tasks={timesheet.tasks} />
                         </Card.Text>
-                        
                     </Card.Body>
                 </Card>
             ))}
+            </>
+            )}
         </div>
     );
 };

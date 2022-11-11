@@ -17,8 +17,8 @@ const EquipmentList = ({ equipment }) => {
             <tbody>
                 {equipment && equipment.map((equipment) => (
                     <tr key={equipment._id}>
-                        <td className='w-60'>{equipment.equipId}</td>
-                        <td className='w-200'>{equipment.equipName}</td>
+                        <td className='equip-id'>{equipment.equipId}</td>
+                        <td>{equipment.equipName}</td>
                     </tr>
                 ))}
             </tbody>

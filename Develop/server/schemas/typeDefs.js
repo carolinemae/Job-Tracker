@@ -67,7 +67,7 @@ const typeDefs = gql`
     addEquipment(equipId: String!, equipName: String!): Equipment
     addTimesheet(date: String, startTime: String, endTime: String, project: String): Timesheet
     updateTimesheet(timesheetId: ID!, date: String!, startTime: String!, endTime: String!, project: String!): Timesheet
-    removeTimesheet(timesheetId: ID!): Timesheet
+    deleteTimesheet(timesheetId: ID!): Timesheet
     addTask(timesheetId: ID!, equipId: String!, taskDesc: String!): Timesheet
     toggleApproved(timesheetId: ID!, approved: Boolean!): Timesheet
     toggleAdmin(employeeId: ID!, admin: Boolean!): Employee

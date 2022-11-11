@@ -1,19 +1,26 @@
 import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Table from 'react-bootstrap/Table';
 
 const TaskList = ({ tasks = [] }) => {
     return(
-        <div>
+        
+        <Table striped bordered hover size="sm">
+            <thead>
+                <tr>
+                    <th className='equip-id'>Equip No.</th>
+                    <th>Tasks</th>
+                </tr>
+            </thead>
+            <tbody>
             {tasks && tasks.map((task) => (
-                <div className='flex' key={task._id}>
-                    <p>
-                        {task.equipId}
-                    </p>
-                    <p>
-                        {task.taskDesc}
-                    </p>
-                </div>
-            ))}
-        </div>
+                <tr key={task._id}>
+                    <td>{task.equipId}</td>
+                    <td>{task.taskDesc}</td>
+                </tr>
+                ))}
+            </tbody>
+        </Table>
     );
 };
 

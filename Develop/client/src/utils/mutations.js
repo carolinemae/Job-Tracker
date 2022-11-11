@@ -48,12 +48,13 @@ export const ADD_EQUIPMENT = gql`
 `;
 
 export const ADD_TIMESHEET = gql`
-  mutation addTimesheet($date: String, $startTime: String, $endTime: String) {
-    addTimesheet(date: $date, startTime: $startTime, endTime: $endTime) {
+  mutation addTimesheet($date: String, $startTime: String, $endTime: String, $project: String) {
+    addTimesheet(date: $date, startTime: $startTime, endTime: $endTime, project: $project) {
       _id
       date
       startTime
       endTime
+      project
       employee
     }
   }
@@ -62,6 +63,24 @@ export const ADD_TIMESHEET = gql`
 export const UPDATE_TIMESHEET = gql`
   mutation updateTimesheet($timesheetId: ID!, $date: String!, $startTime: String!, $endTime: String!, $project: String!) {
     updateTimesheet(timesheetId: $timesheetId, date: $date, startTime: $startTime, endTime: $endTime, project: $project) {
+      _id
+      date
+      startTime
+      endTime
+      employee
+      project
+      tasks {
+        _id
+        equipId
+        taskDesc
+      }
+    }
+  }
+`;
+
+export const DELETE_TIMESHEET = gql`
+  mutation deleteTimesheet($timesheetId: ID!) {
+    deleteTimesheet(timesheetId: $timesheetId) {
       _id
       date
       startTime

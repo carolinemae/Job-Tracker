@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import ProjectList from '../components/ProjectList';
 import ProjectForm from '../components/ProjectForm';
 import { QUERY_PROJECTS } from '../utils/queries';
+import LoadingScreen from '../components/LoadingScreen';
 
 const Projects = () => {
     const { loading, data } = useQuery(QUERY_PROJECTS);
@@ -11,7 +12,7 @@ const Projects = () => {
     return (
         <div>
             {loading ? (
-                <div>Loading...</div>
+                <LoadingScreen />
             ) : (
                 <>
                 <ProjectList projects={projects} />

@@ -45,7 +45,7 @@ const EquipmentForm = () => {
     return (
         <Form className='equip-form'>
             <Form.Group>
-                <Form.Control type="text" name='equipId' placeholder='ID' value={formState.equipId} onChange={handleChange} />
+                <Form.Control className='equip-id' type="text" name='equipId' placeholder='ID' value={formState.equipId} onChange={handleChange} />
             </Form.Group>
             <Form.Group>
                 <Form.Control type="text" name='equipName' placeholder='Make & Model' value={formState.equipName} onChange={handleChange} />

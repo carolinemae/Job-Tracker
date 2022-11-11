@@ -24,7 +24,6 @@ const EmployeeList = ({ employees }) => {
             const { data } = await toggleAdmin({
                 variables: { employeeId, ...toggleState },
             });
-            console.log({...toggleState});
         } catch (err) {
             console.error(err);
         }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_EMPLOYEE } from '../utils/mutations';
-
 import Auth from '../utils/auth';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: '' });
@@ -11,7 +12,6 @@ const Login = (props) => {
     // update state based on form input changes
     const handleChange = (event) => {
       const { name, value } = event.target;
-  
       setFormState({ ...formState, [name]: value, });
     };
   
@@ -30,20 +30,19 @@ const Login = (props) => {
     };
   
     return (
-      <div className='center'>
-        <form onSubmit={handleFormSubmit}>
-          <input className="form-input" placeholder="Your email" name="email" type="email" value={formState.email} onChange={handleChange} />
-          <input className="form-input" placeholder="******" name="password" type="password" value={formState.password} onChange={handleChange} />
-          <button type="submit">
-            Login
-          </button>
-        </form>
-        {error && (
-          <div>
-            {error.message}
-          </div>
-        )}
-      </div>
+      <Form className='login-form' onSubmit={handleFormSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control name='email' type="email" placeholder="Enter email" value={formState.email} onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control name='password' type="password" placeholder="Password" value={formState.password} onChange={handleChange}/>
+        </Form.Group>
+        <Button className='login-btn' variant="dark" type="submit">
+          Login
+        </Button>
+      </Form>
     );
   };
   

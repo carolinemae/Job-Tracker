@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import TaskList from '../TaskList';
 import { useMutation } from '@apollo/client';
 import { TOGGLE_APPROVED } from '../../utils/mutations';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 const TimesheetList = ({ timesheets }) => {
 
@@ -11,8 +15,6 @@ const TimesheetList = ({ timesheets }) => {
     if (!timesheets.length) {
         return 'No Timesheets Yet';
     }
-
-    console.log(timesheets);
 
     const handleToggle = async (event) => {
         event.preventDefault();
@@ -25,7 +27,7 @@ const TimesheetList = ({ timesheets }) => {
                 setToggleState({ approved: false });
                 event.target.value = false;
             }
-            const { data } = await toggleApproved({
+            const { loading, data } = await toggleApproved({
                 variables: { timesheetId, ...toggleState },
             });
         } catch (err) {
@@ -34,35 +36,29 @@ const TimesheetList = ({ timesheets }) => {
     }
 
     return (
-        <div className='center'>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Employee</th>
-                    <th>Project</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Tasks</th>
-                    <th>Approved</th>
-                </tr>
-                {timesheets && timesheets.map((timesheet) => (
-                    <tr key={timesheet._id}>
-                        <td>{timesheet.date}</td>
-                        <td>{timesheet.employee}</td>
-                        <td>{timesheet.project}</td>
-                        <td>{timesheet.startTime}</td>
-                        <td>{timesheet.endTime}</td>
-                        <td>
+        <div>
+            {timesheets && timesheets.map((timesheet) => (
+                <Card>
+                    <Card.Header>
+                        {timesheet.date}
+                        <p className='timesheet-emp'>{timesheet.employee}</p>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{timesheet.project}</Card.Title>
+                        <Card.Text>
+                            {timesheet.startTime} - {timesheet.endTime}
+                        </Card.Text>
+                        <Card.Text>
                             <TaskList tasks={timesheet.tasks} />
-                        </td>
-                        <td>
-                            <button onClick={handleToggle} id={timesheet._id} value={timesheet.approved}>
-                                {timesheet.approved}
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </table>
+                        </Card.Text>
+                        <div className='approve-timesheet'>
+                            <Button className='my-btn'>
+                                <FontAwesomeIcon icon={faCircleCheck} />
+                            </Button>
+                        </div>
+                    </Card.Body>
+                </Card>
+            ))}
         </div>
     );
 };

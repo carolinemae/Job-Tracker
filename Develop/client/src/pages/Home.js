@@ -1,7 +1,8 @@
 import React from 'react';
 import Auth from '../utils/auth';
-import CreateButton from '../components/CreateButton';
 import MyTimesheetList from '../components/MyTimesheetList';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 return (
@@ -12,7 +13,11 @@ return (
           <div className='greeting'>
             Hi, {Auth.getProfile().data.firstName} {Auth.getProfile().data.lastName}!
           </div>
-          <CreateButton />
+          <div className='center'>
+            <Link to='/create'>
+              <Button name='create-button' variant="dark">Create New Timesheet</Button>
+            </Link>
+          </div>
           <MyTimesheetList />
           </>
         ) : (
