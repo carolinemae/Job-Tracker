@@ -33,8 +33,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
     );
     const timesheet = timesheetData?.timesheet || [];
 
-    console.log(timesheet);
-
     // useEffect(() => {
     //     setFormState({
     //         startTime: timesheet.startTime,
