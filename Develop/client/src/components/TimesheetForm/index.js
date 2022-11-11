@@ -31,8 +31,6 @@ const TimesheetForm = () => {
                 variables: { ...formState },
             });
 
-            console.log(data);
-            console.log(formState);
             const timesheetId = data.addTimesheet._id;
             window.location.assign(`/timesheets/${timesheetId}`);
 
