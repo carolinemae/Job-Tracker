@@ -9,29 +9,33 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 const TimesheetList = ({ timesheets }) => {
 
-    const [toggleState, setToggleState] = useState({ approved: true });
+    // const [toggleState, setToggleState] = useState(true);
     const [toggleApproved] = useMutation(TOGGLE_APPROVED);
 
     if (!timesheets.length) {
         return 'No Timesheets Yet';
     }
 
-    const handleToggle = async (event) => {
-        event.preventDefault();
+    const handleToggle = async (timesheetId) => {
         try {
-            const timesheetId = event.target.id;
-            if (event.target.value === false) {
-                setToggleState({ approved: true });
-                event.target.value = true;
-            } else {
-                setToggleState({ approved: false });
-                event.target.value = false;
-            }
-            const { loading, data } = await toggleApproved({
-                variables: { timesheetId, ...toggleState },
+            const approvedTimesheet = document.getElementById(`${timesheetId}`);
+            approvedTimesheet.setAttribute('class', 'green-btn');
+            localStorage.setItem("scroll", window.pageYOffset);
+            const approved = true;
+            const { data } = await toggleApproved({
+                variables: { timesheetId, approved },
             });
+            window.location.reload(false);
+            locationScroll();
         } catch (err) {
             console.error(err);
+        }
+    }
+
+    const locationScroll = () => {
+        const scrollBy = sessionStorage.getItem("scroll")    
+        if (scrollBy) {
+            window.scrollTo(scrollBy,0)
         }
     }
 
@@ -51,10 +55,21 @@ const TimesheetList = ({ timesheets }) => {
                         <Card.Text>
                             <TaskList tasks={timesheet.tasks} />
                         </Card.Text>
+
                         <div className='approve-timesheet'>
-                            <Button className='my-btn'>
-                                <FontAwesomeIcon icon={faCircleCheck} />
-                            </Button>
+                            {timesheet.approved == 'true' ? (
+                                <>
+                                <Button className='my-btn green-btn'>
+                                    <FontAwesomeIcon icon={faCircleCheck} />
+                                </Button>
+                                </>
+                            ) : (
+                                <>
+                                <Button className='my-btn' id={timesheet._id} onClick={() => handleToggle(timesheet._id)}>
+                                    <FontAwesomeIcon icon={faCircleCheck} />
+                                </Button>
+                                </>
+                            )}
                         </div>
                     </Card.Body>
                 </Card>
