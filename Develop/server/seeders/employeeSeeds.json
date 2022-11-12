@@ -5,11 +5,31 @@
     "firstName": "Caroline",
     "lastName": "Thomson",
     "admin": true,
-    "phone": "0459525350",
+    "phone": "0412345678",
     "address": {
       "street": "112 Adelaide Road",
       "city": "Mannum",
       "postcode": "5238"
+    },
+    "emergencyContact": {
+      "emergencyName": "Dan",
+      "emergencyPhone": "0412345678"
+    }
+  },
+  {
+    "email": "dankain@hotmail.com.com",
+    "password": "password123",
+    "firstName": "Dan",
+    "lastName": "Kain",
+    "phone": "0412345678",
+    "address": {
+      "street": "112 Adelaide Road",
+      "city": "Mannum",
+      "postcode": "5238"
+    },
+    "emergencyContact": {
+      "emergencyName": "Caroline",
+      "emergencyPhone": "0412345678"
     }
   }
 ]

@@ -2,19 +2,21 @@
   {
     "projectName": "Eden Stage 12",
     "location": "Two Wells",
-    "description": "Subdivision",
-    "active": true
+    "description": "Subdivision"
   },
   {
     "projectName": "Liberty Stage 5",
     "location": "Two Wells",
-    "description": "Subdivision",
-    "active": true
+    "description": "Subdivision"
   },
   {
     "projectName": "Liberty Stage 6",
     "location": "Two Wells",
-    "description": "Subdivision",
-    "active": true
+    "description": "Subdivision"
+  },
+  {
+    "projectName": "Office",
+    "location": "Mannum",
+    "description": "Main Office"
   }
 ]
