@@ -23,7 +23,7 @@ const Home = () => {
           </>
         ) : (
           <>
-          <div className='center'>
+          <div className='greeting'>
             You must be logged in.
           </div>
           <Login />
