@@ -4,6 +4,12 @@
     "password": "password123",
     "firstName": "Caroline",
     "lastName": "Thomson",
-    "admin": true
+    "admin": true,
+    "phone": "0459525350",
+    "address": {
+      "street": "112 Adelaide Road",
+      "city": "Mannum",
+      "postcode": "5238"
+    }
   }
 ]

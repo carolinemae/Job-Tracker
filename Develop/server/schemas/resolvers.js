@@ -25,12 +25,6 @@ const resolvers = {
     timesheet: async (parent, { timesheetId }) => {
       return Timesheet.findOne({ _id: timesheetId });
     },
-    me: async (parent, args, context) => {
-      if (context.employee) {
-        return Employee.findOne({ _id: context.employee._id }).populate('timesheets');
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    }
   },
 
   Mutation: {
@@ -38,6 +32,15 @@ const resolvers = {
       const employee = await Employee.create({ firstName, lastName, email, password });
       const token = signToken(employee);
       return { token, employee };
+    },
+    updateEmployee: async (parent, { employeeId, phone, street, city, postcode }, context) => {
+      if (context.employee) {
+        return Employee.findOneAndUpdate(
+          { _id: employeeId },
+          { $set: { phone, address: { street, city, postcode } } }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     createProject: async (parent, { projectName, location, description }, context) => {
       if (context.employee.admin) {

@@ -24,7 +24,7 @@ const SingleTimesheet = () => {
             </>
             ) : (
             <>
-            <div className='center'>You must be logged in.</div>
+            <div className='greeting'>You must be logged in.</div>
             <Login />
             </>
             )}

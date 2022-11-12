@@ -18,13 +18,14 @@ const Timesheets = () => {
                 <LoadingScreen />
             ) : (
                 <>
+                <h1>Timesheets</h1>
                 <TimesheetList timesheets={timesheets} />
                 </>
             )}
             </>
             ) : (
             <>
-            <div className='center'>You must be logged in.</div>
+            <div className='greeting'>You must be logged in.</div>
             <Login />
             </>
             )}

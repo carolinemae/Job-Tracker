@@ -8,6 +8,12 @@ export const QUERY_EMPLOYEE = gql`
       lastName
       email
       admin
+      phone
+      address {
+        street
+        city
+        postcode
+      }
       timesheets {
         _id
         date
@@ -33,6 +39,12 @@ export const QUERY_EMPLOYEES = gql`
       lastName
       email
       admin
+      phone
+      address {
+        street
+        city
+        postcode
+      }
       timesheets {
         _id
         date
@@ -40,31 +52,6 @@ export const QUERY_EMPLOYEES = gql`
         endTime
         project
         approved
-        tasks {
-          _id
-          equipId
-          taskDesc
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      firstName
-      lastName
-      email
-      admin
-      timesheets {
-        _id
-        employee
-        date
-        startTime
-        endTime
-        project
         tasks {
           _id
           equipId
@@ -89,6 +76,7 @@ export const QUERY_PROJECTS = gql`
         date
         startTime
         endTime
+        employee
       }
     }
   }
@@ -103,6 +91,13 @@ export const QUERY_PROJECT = gql`
       location
       description
       active
+      timesheets {
+        _id
+        date
+        startTime
+        endTime
+        employee
+      }
     }
   }
 `;

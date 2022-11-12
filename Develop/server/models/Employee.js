@@ -24,6 +24,24 @@ const employeeSchema = new Schema({
         required: true,
         minlength: 3,
     },
+    phone: {
+        type: String,
+        trim: true,
+    },
+    address: {
+        street: {
+            type: String,
+            trim: true,
+        },
+        city: {
+            type: String,
+            trim: true,
+        },
+        postcode: {
+            type: String,
+            trim: true,
+        },
+    },
     startDate: {
         type: Date,
         default: Date.now,

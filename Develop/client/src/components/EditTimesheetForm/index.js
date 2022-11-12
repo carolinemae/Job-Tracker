@@ -3,7 +3,6 @@ import { QUERY_PROJECTS, QUERY_EQUIPMENT, QUERY_TIMESHEET } from '../../utils/qu
 import { UPDATE_TIMESHEET, DELETE_TIMESHEET, ADD_TASK } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 import TaskList from '../TaskList';
-import Auth from '../../utils/auth';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -13,31 +12,24 @@ import LoadingScreen from '../LoadingScreen';
 
 const EditTimesheetForm = ({ timesheetId }) => {
 
-    const savedDate = localStorage.getItem('date') || moment().format('YYYY-MM-DD');
-    const savedStartTime = localStorage.getItem('startTime');
-    const savedEndTime = localStorage.getItem('endTime');
-    const savedProject = localStorage.getItem('project');
-
-    const [formState, setFormState] = useState({
-        date: savedDate,
-        startTime: savedStartTime,
-        endTime: savedEndTime,
-        project: savedProject,
-        equipId: '',
-        taskDesc: '',
-    });
+    // Try query formatted date and populate form!
+    const savedDate = moment().format('YYYY-MM-DD') || localStorage.getItem('date');
 
     const { loading, data: timesheetData } = useQuery(QUERY_TIMESHEET, 
         { variables: { timesheetId: timesheetId }, },
-        // { onCompleted: setFormState },
     );
     const timesheet = timesheetData?.timesheet || [];
 
-    // useEffect(() => {
-    //     setFormState({
-    //         startTime: timesheet.startTime,
-    //     })
-    // }, []);
+    const defaultValues ={
+        date: savedDate,
+        startTime: timesheet.startTime,
+        endTime: timesheet.endTime,
+        project: timesheet.project,
+        equipId: '',
+        taskDesc: '',
+    };
+
+    const [formState, setFormState] = useState(defaultValues);
 
     const [updateTimesheet] = useMutation(UPDATE_TIMESHEET);
     const [deleteTimesheet] = useMutation(DELETE_TIMESHEET);
@@ -83,8 +75,8 @@ const EditTimesheetForm = ({ timesheetId }) => {
         localStorage.setItem(name, value);
     };
 
-    const { data: projectsData } = useQuery(QUERY_PROJECTS);
-    const projects = projectsData?.projects || [];
+    // const { data: projectsData } = useQuery(QUERY_PROJECTS);
+    // const projects = projectsData?.projects || [];
 
     const { data: equipmentData } = useQuery(QUERY_EQUIPMENT);
     const equipment = equipmentData?.equipment || [];
@@ -104,11 +96,11 @@ const EditTimesheetForm = ({ timesheetId }) => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Start Time</Form.Label>
-                        <Form.Control type="time" name='startTime' value={formState.startTime} onChange={handleChange} />
+                        <Form.Control type="time" name='startTime' defaultValue={defaultValues.startTime} value={formState.startTime} onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>End Time</Form.Label>
-                        <Form.Control type="time" name='endTime' value={formState.endTime} onChange={handleChange} />
+                        <Form.Control type="time" name='endTime' defaultValue={defaultValues.endTime} value={formState.endTime} onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Project</Form.Label>

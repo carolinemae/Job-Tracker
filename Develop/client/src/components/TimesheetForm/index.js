@@ -22,7 +22,7 @@ const TimesheetForm = () => {
         employee: Auth.getProfile().data._id,
     });
 
-    const [addTimesheet, { error }] = useMutation(ADD_TIMESHEET);
+    const [addTimesheet] = useMutation(ADD_TIMESHEET);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();

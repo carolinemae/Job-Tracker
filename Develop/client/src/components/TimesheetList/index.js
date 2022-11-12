@@ -8,8 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 const TimesheetList = ({ timesheets }) => {
-
-    // const [toggleState, setToggleState] = useState(true);
     const [toggleApproved] = useMutation(TOGGLE_APPROVED);
 
     if (!timesheets.length) {

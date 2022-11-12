@@ -23,6 +23,7 @@ const Header = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         {Auth.loggedIn() ? (
                             <>
+                            <Nav.Link href="/profile">Profile</Nav.Link>
                             {Auth.checkAdmin() ? (
                                 <>
                                 <NavDropdown title="Manage" id="collasible-nav-dropdown">

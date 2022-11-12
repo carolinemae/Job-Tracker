@@ -26,6 +26,21 @@ export const ADD_EMPLOYEE = gql`
   }
 `;
 
+export const UPDATE_EMPLOYEE = gql`
+  mutation updateEmployee($employeeId: ID!, $phone: String, $street: String, $city: String, $postcode: String) {
+    updateEmployee(employeeId: $employeeId, phone: $phone, street: $street, city: $city, postcode: $postcode) {
+      _id
+      phone
+      address {
+        _id
+        street
+        city
+        postcode
+      }
+    }
+  }
+`;
+
 export const CREATE_PROJECT = gql`
   mutation createProject($projectName: String!, $location: String!, $description: String!) {
     createProject(projectName: $projectName, location: $location, description: $description) {

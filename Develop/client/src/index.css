@@ -7,6 +7,11 @@
   transition: all .2s ease;
 }
 
+h1 {
+  font-size: xx-large;
+  margin: 20px 0px 30px;
+}
+
 .navbar-collapse {
   justify-content: end;
 }
@@ -88,7 +93,7 @@
 }
 
 .form-label {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .modal-dialog {
@@ -151,6 +156,11 @@
 
 .green-btn {
   color: var(--green);
+}
+
+.profile-name {
+  font-size: initial;
+  padding-left: 10px;
 }
 
 /* :root {

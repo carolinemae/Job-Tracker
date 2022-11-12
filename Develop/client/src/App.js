@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Projects from './pages/Projects';
 import Equipment from './pages/Equipment';
 import Employees from './pages/Employees';
+import Profile from './pages/Profile';
 import Timesheets from './pages/Timesheets';
 import SingleTimesheet from './pages/SingleTimesheet';
 import CreateTimesheet from './pages/CreateTimesheet';
@@ -68,6 +69,10 @@ function App() {
               <Route 
                 path="/employees" 
                 element={<Employees />} 
+              />
+              <Route 
+                path="/profile" 
+                element={<Profile />} 
               />
               <Route 
                 path="/timesheets" 

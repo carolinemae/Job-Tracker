@@ -20,6 +20,7 @@ const Employees = () => {
             <>
             {Auth.checkAdmin() ? (
                 <>
+                <h1>Employees</h1>
                 <EmployeeList employees={employees} />
                 </>
             ) : (
@@ -32,7 +33,7 @@ const Employees = () => {
             </>
             ) : (
             <>
-            <div className='center'>You must be logged in.</div>
+            <div className='greeting'>You must be logged in.</div>
             <Login />
             </>
             )}

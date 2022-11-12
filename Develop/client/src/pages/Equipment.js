@@ -19,6 +19,7 @@ const Equipment = () => {
                 <LoadingScreen />
             ) : (
                 <>
+                <h1>Equipment</h1>
                 <EquipmentList equipment={equipment} />
                 <EquipmentForm />
                 </>
@@ -26,7 +27,7 @@ const Equipment = () => {
             </>
             ) : (
             <>
-            <div className='center'>You must be logged in.</div>
+            <div className='greeting'>You must be logged in.</div>
             <Login />
             </>
             )}

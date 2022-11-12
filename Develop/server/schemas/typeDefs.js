@@ -34,6 +34,13 @@ const typeDefs = gql`
     taskDesc: String
   }
 
+  type Address {
+    _id: ID
+    street: String
+    city: String
+    postcode: String
+  }
+
   type Employee {
     _id: ID
     email: String
@@ -41,6 +48,8 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     admin: String
+    phone: String
+    address: Address
     timesheets: [Timesheet]!
   }
 
@@ -55,13 +64,13 @@ const typeDefs = gql`
     equipment: [Equipment]
     employees: [Employee]
     employee(employeeId: ID!): Employee
-    me: Employee
     timesheets(employee: String): [Timesheet]
     timesheet(timesheetId: ID!): Timesheet
   }
 
   type Mutation {
     addEmployee(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    updateEmployee(employeeId: ID!, phone: String, street: String, city: String, postcode: String): Employee
     login(email: String!, password: String!): Auth
     createProject(projectName: String!, location: String!, description: String!): Project
     addEquipment(equipId: String!, equipName: String!): Equipment
