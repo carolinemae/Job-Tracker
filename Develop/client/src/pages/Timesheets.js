@@ -14,19 +14,19 @@ const Timesheets = () => {
         <div>
             {Auth.loggedIn() ? (
             <>
-            {loading ? (
-                <LoadingScreen />
-            ) : (
-                <>
-                <h1>Timesheets</h1>
-                <TimesheetList timesheets={timesheets} />
-                </>
-            )}
+                {loading ? (
+                    <LoadingScreen />
+                ) : (
+                    <>
+                        <h1>Timesheets</h1>
+                        <TimesheetList timesheets={timesheets} />
+                    </>
+                )}
             </>
             ) : (
             <>
-            <div className='greeting'>You must be logged in.</div>
-            <Login />
+                <div className='greeting'>You must be logged in.</div>
+                <Login />
             </>
             )}
         </div>
