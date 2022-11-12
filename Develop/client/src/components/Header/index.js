@@ -7,7 +7,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Header = () => {
-
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();

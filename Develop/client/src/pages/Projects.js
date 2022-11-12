@@ -4,6 +4,8 @@ import ProjectList from '../components/ProjectList';
 import ProjectForm from '../components/ProjectForm';
 import { QUERY_PROJECTS } from '../utils/queries';
 import LoadingScreen from '../components/LoadingScreen';
+import Auth from '../utils/auth';
+import Login from '../pages/Login';
 
 const Projects = () => {
     const { loading, data } = useQuery(QUERY_PROJECTS);
@@ -11,6 +13,8 @@ const Projects = () => {
 
     return (
         <div>
+            {Auth.loggedIn() ? (
+            <>
             {loading ? (
                 <LoadingScreen />
             ) : (
@@ -18,6 +22,13 @@ const Projects = () => {
                 <ProjectList projects={projects} />
                 <ProjectForm />
                 </>
+            )}
+            </>
+            ) : (
+            <>
+            <div className='center'>You must be logged in.</div>
+            <Login />
+            </>
             )}
         </div>
     );

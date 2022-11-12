@@ -3,13 +3,9 @@ import Auth from '../utils/auth';
 import MyTimesheetList from '../components/MyTimesheetList';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import Login from '../pages/Login';
 
 const Home = () => {
-  if (Auth.loggedIn()) {
-  } else {
-    window.location.assign('/login');
-  }
-
   return (
     <main>
       <div>
@@ -27,9 +23,10 @@ const Home = () => {
           </>
         ) : (
           <>
-          <div className='greeting'>
+          <div className='center'>
             You must be logged in.
           </div>
+          <Login />
           </>
         )}
       </div>

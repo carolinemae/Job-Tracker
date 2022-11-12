@@ -2,10 +2,9 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import LoadingScreen from '../components/LoadingScreen';
-
 import EmployeeList from '../components/EmployeeList';
-
 import { QUERY_EMPLOYEES } from '../utils/queries';
+import Login from '../pages/Login';
 
 const Employees = () => {
     const { loading, data } = useQuery(QUERY_EMPLOYEES);
@@ -13,6 +12,8 @@ const Employees = () => {
 
     return (
         <div>
+            {Auth.loggedIn() ? (
+            <>
             {loading ? (
                 <LoadingScreen />
             ) : (
@@ -26,6 +27,13 @@ const Employees = () => {
                 You must be an admin to view this page.
                 </>
             )}
+            </>
+            )}
+            </>
+            ) : (
+            <>
+            <div className='center'>You must be logged in.</div>
+            <Login />
             </>
             )}
         </div>

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { TOGGLE_ADMIN } from '../../utils/mutations';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 const EmployeeList = ({ employees }) => {
     const [toggleState, setToggleState] = useState({ admin: true });
@@ -31,7 +35,21 @@ const EmployeeList = ({ employees }) => {
 
     return (
         <div className='center'>
-            <table>
+            {employees && employees.map((employee) => (
+                <Card style={{ width: '18rem' }}  key={employee._id}>
+                    <Card.Header>{employee.firstName} {employee.lastName}</Card.Header>
+                    <ListGroup variant="flush">
+                        <ListGroup.Item><Link href={`mailto:${employee.email}`}>{employee.email}</Link></ListGroup.Item>
+                        <ListGroup.Item>Admin: 
+                        <Button variant="dark">
+                            {employee.admin}
+                        </Button>
+                            </ListGroup.Item>
+                    </ListGroup>
+                </Card>
+            ))}
+
+            {/* <table>
                 <tr>
                     <th>Firstname</th>
                     <th>Lastname</th>
@@ -48,7 +66,7 @@ const EmployeeList = ({ employees }) => {
                             </button></td>
                     </tr>
                 ))}
-            </table>
+            </table> */}
         </div>
     );
 };
