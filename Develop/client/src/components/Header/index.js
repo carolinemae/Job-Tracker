@@ -27,9 +27,9 @@ const Header = () => {
                             {Auth.checkAdmin() ? (
                                 <>
                                 <NavDropdown title="Manage" id="collasible-nav-dropdown">
-                                    <NavDropdown.Item href="/projects">Projects</NavDropdown.Item>
-                                    <NavDropdown.Item href="/equipment">Equipment</NavDropdown.Item>
                                     <NavDropdown.Item href="/employees">Employees</NavDropdown.Item>
+                                    <NavDropdown.Item href="/equipment">Equipment</NavDropdown.Item>
+                                    <NavDropdown.Item href="/projects">Projects</NavDropdown.Item>
                                     <NavDropdown.Item href="/timesheets">Timesheets</NavDropdown.Item>
                                 </NavDropdown>
                                 </>

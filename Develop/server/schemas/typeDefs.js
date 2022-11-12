@@ -41,6 +41,12 @@ const typeDefs = gql`
     postcode: String
   }
 
+  type EmergencyContact {
+    _id: ID
+    emergencyName: String
+    emergencyPhone: String
+  }
+
   type Employee {
     _id: ID
     email: String
@@ -50,6 +56,7 @@ const typeDefs = gql`
     admin: String
     phone: String
     address: Address
+    emergencyContact: EmergencyContact
     timesheets: [Timesheet]!
   }
 
@@ -70,7 +77,7 @@ const typeDefs = gql`
 
   type Mutation {
     addEmployee(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    updateEmployee(employeeId: ID!, phone: String, street: String, city: String, postcode: String): Employee
+    updateEmployee(employeeId: ID!, phone: String, street: String, city: String, postcode: String, emergencyName: String, emergencyPhone: String): Employee
     login(email: String!, password: String!): Auth
     createProject(projectName: String!, location: String!, description: String!): Project
     addEquipment(equipId: String!, equipName: String!): Equipment

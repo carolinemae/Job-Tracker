@@ -33,11 +33,17 @@ const resolvers = {
       const token = signToken(employee);
       return { token, employee };
     },
-    updateEmployee: async (parent, { employeeId, phone, street, city, postcode }, context) => {
+    updateEmployee: async (parent, { employeeId, phone, street, city, postcode, emergencyName, emergencyPhone }, context) => {
       if (context.employee) {
+        // if (phone) { await Employee.findOneAndUpdate({ _id: employeeId }, { $set: { phone } }) };
+        // if (street) { await Employee.findOneAndUpdate({ _id: employeeId }, { $set: { address: { street } } }) };
+        // if (city) { await Employee.findOneAndUpdate({ _id: employeeId }, { $set: { address: { city } } }) };
+        // if (emergencyName) { await Employee.findOneAndUpdate({ _id: employeeId }, { $set: { emergencyContact: { emergencyName } } }) };
+        // if (emergencyPhone) { await Employee.findOneAndUpdate({ _id: employeeId }, { $set: { emergencyContact: { emergencyPhone } } }) };
+
         return Employee.findOneAndUpdate(
           { _id: employeeId },
-          { $set: { phone, address: { street, city, postcode } } }
+          { $set: { phone, address: { street, city, postcode }, emergencyContact: { emergencyName, emergencyPhone } } }
         );
       }
       throw new AuthenticationError('You need to be logged in!');

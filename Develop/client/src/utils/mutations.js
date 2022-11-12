@@ -27,8 +27,8 @@ export const ADD_EMPLOYEE = gql`
 `;
 
 export const UPDATE_EMPLOYEE = gql`
-  mutation updateEmployee($employeeId: ID!, $phone: String, $street: String, $city: String, $postcode: String) {
-    updateEmployee(employeeId: $employeeId, phone: $phone, street: $street, city: $city, postcode: $postcode) {
+  mutation updateEmployee($employeeId: ID!, $phone: String, $street: String, $city: String, $postcode: String, $emergencyName: String, $emergencyPhone: String) {
+    updateEmployee(employeeId: $employeeId, phone: $phone, street: $street, city: $city, postcode: $postcode, emergencyName: $emergencyName, emergencyPhone: $emergencyPhone) {
       _id
       phone
       address {
@@ -36,6 +36,11 @@ export const UPDATE_EMPLOYEE = gql`
         street
         city
         postcode
+      }
+      emergencyContact {
+        _id
+        emergencyName
+        emergencyPhone
       }
     }
   }

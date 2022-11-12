@@ -28,6 +28,19 @@ const employeeSchema = new Schema({
         type: String,
         trim: true,
     },
+    startDate: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+    },
+    admin: {
+        type: Boolean,
+        default: false,
+    },
+    active: {
+        type: Boolean,
+        default: true,
+    },
     address: {
         street: {
             type: String,
@@ -42,18 +55,15 @@ const employeeSchema = new Schema({
             trim: true,
         },
     },
-    startDate: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
-    },
-    admin: {
-        type: Boolean,
-        default: false,
-    },
-    active: {
-        type: Boolean,
-        default: true,
+    emergencyContact: {
+        emergencyName: {
+            type: String,
+            trim: true,
+        },
+        emergencyPhone: {
+            type: String,
+            trim: true,
+        },
     },
     timesheets: [
         {

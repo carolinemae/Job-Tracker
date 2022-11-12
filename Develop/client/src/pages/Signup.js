@@ -28,6 +28,7 @@ const Signup = () => {
         variables: { ...formState },
       });
       Auth.login(data.addEmployee.token);
+      window.location.assign('/profile');
     } catch (e) {
       console.error(e);
     }

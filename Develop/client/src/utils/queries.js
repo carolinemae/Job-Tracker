@@ -14,6 +14,10 @@ export const QUERY_EMPLOYEE = gql`
         city
         postcode
       }
+      emergencyContact {
+        emergencyName
+        emergencyPhone
+      }
       timesheets {
         _id
         date
@@ -44,6 +48,10 @@ export const QUERY_EMPLOYEES = gql`
         street
         city
         postcode
+      }
+      emergencyContact {
+        emergencyName
+        emergencyPhone
       }
       timesheets {
         _id

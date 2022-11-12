@@ -10,6 +10,8 @@ const EmployeeList = ({ employees }) => {
     const [toggleState, setToggleState] = useState({ admin: true });
     const [toggleAdmin] = useMutation(TOGGLE_ADMIN);
     
+    console.log(employees);
+
     if (!employees.length) {
         return 'No Employees Yet';
     }
