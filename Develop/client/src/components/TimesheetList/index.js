@@ -16,8 +16,6 @@ const TimesheetList = ({ timesheets }) => {
 
     const handleToggle = async (timesheetId) => {
         try {
-            const approvedTimesheet = document.getElementById(`${timesheetId}`);
-            approvedTimesheet.setAttribute('class', 'green-btn');
             localStorage.setItem("scroll", window.pageYOffset);
             const approved = true;
             const { data } = await toggleApproved({
