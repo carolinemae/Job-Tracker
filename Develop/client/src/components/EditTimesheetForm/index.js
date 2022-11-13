@@ -51,7 +51,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
     }
 
     const handleFormSubmit = async (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         try {
             const equipId = {...formState}.equipId;
             const taskDesc = {...formState}.taskDesc;
@@ -73,6 +73,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
+        console.log(formState);
     };
 
     // const { data: projectsData } = useQuery(QUERY_PROJECTS);
@@ -98,11 +99,11 @@ const EditTimesheetForm = ({ timesheetId }) => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Start Time</Form.Label>
-                        <Form.Control type="time" name='startTime' defaultValue={defaultValues.startTime} value={formState.startTime} onChange={handleChange} />
+                        <Form.Control type="time" name='startTime' value={formState.startTime} onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>End Time</Form.Label>
-                        <Form.Control type="time" name='endTime' defaultValue={defaultValues.endTime} value={formState.endTime} onChange={handleChange} />
+                        <Form.Control type="time" name='endTime' value={formState.endTime} onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Project</Form.Label>

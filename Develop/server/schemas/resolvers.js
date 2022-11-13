@@ -105,7 +105,7 @@ const resolvers = {
     deleteTimesheet: async (parent, { timesheetId }) => {
       return Timesheet.findOneAndDelete({ _id: timesheetId });
     },
-    addTask: async (parent, { timesheetId, equipId, taskDesc, project }) => {
+    addTask: async (parent, { timesheetId, equipId, taskDesc, project }, context) => {
       if (context.employee) {
         return Timesheet.findOneAndUpdate(
           { _id: timesheetId },
