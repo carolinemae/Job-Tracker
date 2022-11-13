@@ -116,7 +116,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     toggleApproved: async (parent, { timesheetId, approved }, context) => {
-      if (context.employee) {
+      if (context.employee.admin) {
         return Timesheet.findOneAndUpdate(
           { _id: timesheetId },
           { $set: { approved: approved } }
