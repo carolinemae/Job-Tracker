@@ -21,7 +21,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
     const timesheet = timesheetData?.timesheet || [];
 
     const defaultValues ={
-        date: savedDate,
         startTime: timesheet.startTime,
         endTime: timesheet.endTime,
         project: timesheet.project,
@@ -51,7 +50,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
     }
 
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         try {
             const equipId = {...formState}.equipId;
             const taskDesc = {...formState}.taskDesc;
