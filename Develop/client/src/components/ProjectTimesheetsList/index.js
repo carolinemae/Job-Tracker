@@ -15,7 +15,7 @@ const ProjectTimesheetsList = ({ project }) => {
     if (!timesheets.length) {
         return (
             <div>
-                <h1>{project.projectName}</h1>
+                <h1>{project.projectName} - Timesheets</h1>
                 <div className='greeting'>No Timesheets Yet</div>
             </div>
         );
@@ -44,7 +44,7 @@ const ProjectTimesheetsList = ({ project }) => {
 
     return (
         <div>
-            <h1>{project.projectName}</h1>
+            <h1>{project.projectName} - Timesheets</h1>
             {timesheets && timesheets.map((timesheet) => (
                 <Card>
                     <Card.Header>
