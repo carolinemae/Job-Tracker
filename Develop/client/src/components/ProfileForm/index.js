@@ -62,6 +62,10 @@ const ProfileForm = () => {
                         <Form.Text className='profile-name'>{employee.firstName} {employee.lastName}</Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Text className='profile-name'>{employee.email}</Form.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
                         <Form.Label>Mobile Number</Form.Label>
                         <Form.Control type="tel" name='phone' placeholder='0409 974 491' defaultValue={defaultValues.phone} value={formState.phone} onChange={handleChange} />
                     </Form.Group>
