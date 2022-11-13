@@ -60,6 +60,7 @@ const TimesheetForm = () => {
                 <Form.Group className="mb-3">
                     <Form.Label>Date</Form.Label>
                     <Form.Control type="date" name='date' value={formState.date} onChange={handleChange} />
+                    <Form.Text className='form-note'>* you won't be able to edit this later</Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Start Time</Form.Label>
@@ -79,6 +80,7 @@ const TimesheetForm = () => {
                                 </option>
                             ))}
                     </Form.Select>
+                    <Form.Text className='form-note'>* you won't be able to edit this later</Form.Text>
                 </Form.Group>
                 <Form.Group className='center'>
                     <Button variant="dark" type="submit">
