@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Projects from './pages/Projects';
+import SingleProject from './pages/SingleProject';
 import Equipment from './pages/Equipment';
 import Employees from './pages/Employees';
 import Profile from './pages/Profile';
@@ -61,6 +62,10 @@ function App() {
               <Route 
                 path="/projects" 
                 element={<Projects />} 
+              />
+              <Route 
+                path="/projects/:projectId" 
+                element={<SingleProject />} 
               />
               <Route 
                 path="/equipment" 

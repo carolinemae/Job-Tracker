@@ -105,12 +105,15 @@ const resolvers = {
     deleteTimesheet: async (parent, { timesheetId }) => {
       return Timesheet.findOneAndDelete({ _id: timesheetId });
     },
-    addTask: async (parent, { timesheetId, equipId, taskDesc }) => {
+    addTask: async (parent, { timesheetId, equipId, taskDesc, project }) => {
+      if (context.employee) {
         return Timesheet.findOneAndUpdate(
           { _id: timesheetId },
           { $addToSet: { tasks: { equipId, taskDesc } } },
           { new: true, runValidators: true, }
         );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     toggleApproved: async (parent, { timesheetId, approved }, context) => {
       if (context.employee) {

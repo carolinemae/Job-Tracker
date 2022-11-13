@@ -92,7 +92,7 @@ export const QUERY_PROJECTS = gql`
 
 export const QUERY_PROJECT = gql`
   query project($projectId: ID!) {
-    projects {
+    project(projectId: $projectId) {
       _id
       projectName
       startDate
@@ -105,6 +105,13 @@ export const QUERY_PROJECT = gql`
         startTime
         endTime
         employee
+        project
+        approved
+        tasks {
+          _id
+          equipId
+          taskDesc
+        }
       }
     }
   }
