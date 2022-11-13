@@ -22,6 +22,16 @@ h1 {
   font-weight: 500;
 }
 
+.link {
+  color: #2f5bab;
+  font-weight: 600;
+}
+
+.link:hover {
+  color: #466cb4;
+  text-decoration: none;
+}
+
 .card {
   margin: 20px 0px;
   border: 1px solid rgb(0 0 0 / 51%);
@@ -92,6 +102,9 @@ h1 {
 .center {
   display: flex;
   justify-content: center;
+}
+
+.wrap {
   flex-wrap: wrap;
 }
 
@@ -164,6 +177,17 @@ h1 {
 .profile-name {
   font-size: initial;
   padding-left: 10px;
+}
+
+.inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.red-x {
+  padding-right: 5px;
+  color: red;
 }
 
 /* :root {

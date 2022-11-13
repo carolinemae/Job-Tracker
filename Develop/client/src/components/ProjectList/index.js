@@ -22,7 +22,7 @@ const ProjectList = ({ projects }) => {
                 {projects && projects.map((project) => (
                     <tr key={project._id}>
                         <td className='w-200'>
-                            <Link to={`/projects/${project._id}`}>
+                            <Link className='link' to={`/projects/${project._id}`}>
                                 {project.projectName}
                             </Link>
                         </td>

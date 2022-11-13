@@ -8,13 +8,17 @@ import Card from 'react-bootstrap/Card';
 import TaskList from '../TaskList';
 
 const ProjectTimesheetsList = ({ project }) => {
-    console.log(project);
     const timesheets = project.timesheets;
 
     const [toggleApproved] = useMutation(TOGGLE_APPROVED);
 
     if (!timesheets.length) {
-        return 'No Timesheets Yet';
+        return (
+            <div>
+                <h1>{project.projectName}</h1>
+                <div className='greeting'>No Timesheets Yet</div>
+            </div>
+        );
     }
 
     const handleToggle = async (timesheetId) => {
