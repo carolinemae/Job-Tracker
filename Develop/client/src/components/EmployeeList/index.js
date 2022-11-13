@@ -6,6 +6,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import Table from 'react-bootstrap/esm/Table';
 
 const EmployeeList = ({ employees }) => {
     const [toggleAdmin] = useMutation(TOGGLE_ADMIN);
@@ -45,14 +48,28 @@ const EmployeeList = ({ employees }) => {
     }
 
     return (
-        <div className='center'>
+        <div className='center wrap'>
             {employees && employees.map((employee) => (
-                <Card key={employee._id}>
-                    <Card.Header>{employee.firstName} {employee.lastName}</Card.Header>
+                <Card key={employee._id} className="employee-card">
+                    <Card.Header>
+                        {employee.firstName} {employee.lastName}
+                        <FontAwesomeIcon icon={faUser} />
+                    </Card.Header>
+                    <Table>
+                        <tr>
+                            <th>Phone</th>
+                            <td>{employee.phone}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><Link href={`mailto:${employee.email}`}>{employee.email}</Link></td>
+                        </tr>
+                        <tr>
+                            <th>Emergency Contact</th>
+                            <td>{employee.emergencyContact.emergencyPhone} ({employee.emergencyContact.emergencyName})</td>
+                        </tr>
+                    </Table>
                     <ListGroup>
-                        <ListGroup.Item>Phone: {employee.phone}</ListGroup.Item>
-                        <ListGroup.Item>Email: <Link href={`mailto:${employee.email}`}>{employee.email}</Link></ListGroup.Item>
-                        <ListGroup.Item>Emergency Contact: {employee.emergencyContact.emergencyName} {employee.emergencyContact.emergencyPhone}</ListGroup.Item>
                         <ListGroup.Item className='center'>
                             {employee.admin == 'true' ? (
                             <>

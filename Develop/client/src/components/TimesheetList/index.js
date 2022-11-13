@@ -16,11 +16,11 @@ const TimesheetList = ({ timesheets }) => {
 
     const handleToggle = async (timesheetId) => {
         try {
-            localStorage.setItem("scroll", window.pageYOffset);
             const approved = true;
             const { data } = await toggleApproved({
                 variables: { timesheetId, approved },
             });
+            localStorage.setItem("scroll", window.pageYOffset);
             window.location.reload(false);
             locationScroll();
         } catch (err) {
