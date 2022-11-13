@@ -93,7 +93,8 @@ const EditTimesheetForm = ({ timesheetId }) => {
                 <Form className='edit-form' onSubmit={handleFormSubmit}>
                     <Form.Group className="mb-3">
                         <Form.Label>Date</Form.Label>
-                        <Form.Control type="date" name='date' value={formState.date} onChange={handleChange} />
+                        <Form.Text className='fixed-form-text'>{timesheet.date}</Form.Text>
+                        {/* <Form.Control type="date" name='date' value={formState.date} onChange={handleChange} /> */}
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Start Time</Form.Label>
