@@ -51,7 +51,7 @@ const EmployeeList = ({ employees }) => {
         <div className='center wrap'>
             {employees && employees.map((employee) => (
                 <Card key={employee._id} className="employee-card">
-                    <Card.Header>
+                    <Card.Header className='employee-header'>
                         {employee.firstName} {employee.lastName}
                         <FontAwesomeIcon icon={faUser} />
                     </Card.Header>
