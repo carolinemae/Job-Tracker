@@ -5,16 +5,16 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     projects: async () => {
-      return Project.find().populate('timesheets');
+      return Project.find().sort('projectName').populate('timesheets');
     },
     project: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId }).populate({ path: 'timesheets', options: { sort: { 'date': -1 } } });
     },
     equipment: async () => {
-      return Equipment.find();
+      return Equipment.find().sort('equipId');
     },
     employees: async () => {
-      return Employee.find().populate('timesheets');
+      return Employee.find().sort('firstName').populate('timesheets');
     },
     employee: async (parent, { employeeId }) => {
       return Employee.findOne({ _id: employeeId }).populate({ path: 'timesheets', options: { sort: { 'date': -1 } } });
