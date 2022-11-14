@@ -10,5 +10,89 @@
   {
     "equipId": "L68",
     "equipName": "Cat 950H Loader"
+  },
+  {
+    "equipId": "BH53",
+    "equipName": "JD 315SG Backhoe"
+  },
+  {
+    "equipId": "BH54",
+    "equipName": "Cat 432F2Backhoe"
+  },
+  {
+    "equipId": "BH55",
+    "equipName": "Cat 432 Backhoe"
+  },
+  {
+    "equipId": "R82",
+    "equipName": "Ingersoll Rand Roller"
+  },
+  {
+    "equipId": "R83",
+    "equipName": "Cat CS563E Roller"
+  },
+  {
+    "equipId": "Ex103",
+    "equipName": "Cat 320CL Excavator 20t"
+  },
+  {
+    "equipId": "Ex104",
+    "equipName": "Cat 330DL Excav 32t"
+  },
+  {
+    "equipId": "Ex105",
+    "equipName": "Komatsu PC138US-2 Excav 13t"
+  },
+  {
+    "equipId": "Ex106",
+    "equipName": "Cat 336D Excav 40t"
+  },
+  {
+    "equipId": "D121",
+    "equipName": "Komatsu Dozer"
+  },
+  {
+    "equipId": "D123",
+    "equipName": "Cat D8T Dozer"
+  },
+  {
+    "equipId": "G135",
+    "equipName": "Cat 140 Next Gen Grader"
+  },
+  {
+    "equipId": "S141",
+    "equipName": "Cat 615 Scraper"
+  },
+  {
+    "equipId": "U36",
+    "equipName": "2020 Hilux 4x2 Tray Top Ute"
+  },
+  {
+    "equipId": "U37",
+    "equipName": "2021 Hilux Dual Cab"
+  },
+  {
+    "equipId": "U38",
+    "equipName": "2022 Hilux Dual Cab"
+  },
+  {
+    "equipId": "M7",
+    "equipName": "Mack 7 Tandem Tipper"
+  },
+  {
+    "equipId": "M8",
+    "equipName": "Mack 8 Tandem Tipper"
+  },
+  {
+    "equipId": "T15",
+    "equipName": "Iveco Concrete 8m3"
+  },
+  {
+    "equipId": "T16",
+    "equipName": "Cat 730 Dump Truck"
+  },
+  {
+    "equipId": "T17",
+    "equipName": "Hino 5 tonne Tipper"
   }
 ]

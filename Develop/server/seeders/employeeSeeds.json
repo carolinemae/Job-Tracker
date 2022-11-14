@@ -19,7 +19,7 @@
   {
     "email": "dankain@hotmail.com",
     "password": "password123",
-    "firstName": "Dan",
+    "firstName": "Daniel",
     "lastName": "Kain",
     "phone": "0412345678",
     "address": {
@@ -29,6 +29,38 @@
     },
     "emergencyContact": {
       "emergencyName": "Caroline",
+      "emergencyPhone": "0412345678"
+    }
+  },
+  {
+    "email": "manthony@gmail.com",
+    "password": "password123",
+    "firstName": "Michael",
+    "lastName": "Anthony",
+    "phone": "0412345678",
+    "address": {
+      "street": "112 Adelaide Road",
+      "city": "Mannum",
+      "postcode": "5238"
+    },
+    "emergencyContact": {
+      "emergencyName": "Chona",
+      "emergencyPhone": "0412345678"
+    }
+  },
+  {
+    "email": "samueljohn@gmail.com",
+    "password": "password123",
+    "firstName": "Samuel",
+    "lastName": "John",
+    "phone": "0412345678",
+    "address": {
+      "street": "112 Adelaide Road",
+      "city": "Mannum",
+      "postcode": "5238"
+    },
+    "emergencyContact": {
+      "emergencyName": "Mark",
       "emergencyPhone": "0412345678"
     }
   }

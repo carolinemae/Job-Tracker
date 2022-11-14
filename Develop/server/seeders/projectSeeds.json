@@ -18,5 +18,15 @@
     "projectName": "Office",
     "location": "Mannum",
     "description": "Main Office"
+  },
+  {
+    "projectName": "Pathways Stage E3 E4",
+    "location": "Murray Bridge",
+    "description": "Subdivision"
+  },
+  {
+    "projectName": "The Crossing Stage 5",
+    "location": "Mannum",
+    "description": "Subdivision"
   }
 ]
