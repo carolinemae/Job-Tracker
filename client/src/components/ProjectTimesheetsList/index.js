@@ -8,10 +8,13 @@ import Card from 'react-bootstrap/Card';
 import TaskList from '../TaskList';
 
 const ProjectTimesheetsList = ({ project }) => {
+    // Get timesheets array from project data
     const timesheets = project.timesheets;
 
+    // Use mutation to toggle timesheet approval
     const [toggleApproved] = useMutation(TOGGLE_APPROVED);
 
+    // Render if no timesheets for selected project
     if (!timesheets.length) {
         return (
             <div>
@@ -21,6 +24,7 @@ const ProjectTimesheetsList = ({ project }) => {
         );
     }
 
+    // Approve timesheets - function to remove approval not implemented
     const handleToggle = async (timesheetId) => {
         try {
             localStorage.setItem("scroll", window.pageYOffset);
@@ -35,6 +39,7 @@ const ProjectTimesheetsList = ({ project }) => {
         }
     }
 
+    // Go back to location on back once button clicked
     const locationScroll = () => {
         const scrollBy = sessionStorage.getItem("scroll")    
         if (scrollBy) {
@@ -42,6 +47,7 @@ const ProjectTimesheetsList = ({ project }) => {
         }
     }
 
+    // Render components on page
     return (
         <div>
             <h1>{project.projectName} - Timesheets</h1>

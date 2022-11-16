@@ -12,13 +12,14 @@ import LoadingScreen from '../LoadingScreen';
 
 const EditTimesheetForm = ({ timesheetId }) => {
 
-    const savedDate = moment().format('YYYY-MM-DD') || localStorage.getItem('date');
-
+    // Get single timesheet data
     const { loading, data: timesheetData } = useQuery(QUERY_TIMESHEET, 
         { variables: { timesheetId: timesheetId }, },
     );
+    // Create variable for timesheet data
     const timesheet = timesheetData?.timesheet || [];
 
+    // Set default values from TimesheetForm
     const defaultValues ={
         startTime: timesheet.startTime,
         endTime: timesheet.endTime,
@@ -27,18 +28,21 @@ const EditTimesheetForm = ({ timesheetId }) => {
         taskDesc: '',
     };
 
+    // Set form state to default values
     const [formState, setFormState] = useState(defaultValues);
 
+    // Use mutations to update database
     const [updateTimesheet] = useMutation(UPDATE_TIMESHEET);
     const [deleteTimesheet] = useMutation(DELETE_TIMESHEET);
     const [addTask] = useMutation(ADD_TASK);
 
+    // Modal state to toggle hidden/shown
     const [showModal, setShowModal] = useState(false);
-
     const modalDisplay = () => {
         setShowModal(current => !current);
     }
 
+    // Delete timesheet and redirect to homepage
     const handleDelete = async (event) => {
         try {
             await deleteTimesheet({ variables: { timesheetId } });
@@ -48,9 +52,10 @@ const EditTimesheetForm = ({ timesheetId }) => {
         }
     }
 
+    // Submit updated fields to edit timesheet
     const handleFormSubmit = async (event) => {
-        // event.preventDefault();
         try {
+            // Add task only if equipId and taskDesc fields are populated
             const equipId = {...formState}.equipId;
             const taskDesc = {...formState}.taskDesc;
             if (equipId == 0 && taskDesc == 0) {} else {
@@ -58,25 +63,29 @@ const EditTimesheetForm = ({ timesheetId }) => {
                     variables: { timesheetId, ...formState },
                 });
             }
+            // Update timesheet with any other fields
             const { data: updatedTimesheet } = await updateTimesheet({
                 variables: { timesheetId, ...formState },
             });
+            // Reset form state for taskDesc
             setFormState({ taskDesc: '' });
         } catch (err) {
             console.error(err);
         }
     };
 
+    // Update form state with changed fields
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
-        console.log(formState);
     };
 
+    // Query equipment from databse to render equipment list
     const { data: equipmentData } = useQuery(QUERY_EQUIPMENT);
     const equipment = equipmentData?.equipment || [];
 
+    // Components to render on page
     return (
         <div>
             {loading ? (
@@ -143,9 +152,7 @@ const EditTimesheetForm = ({ timesheetId }) => {
                 </>
             )}
         </div>
-
-    )
-
+    );
 };
 
 export default EditTimesheetForm;

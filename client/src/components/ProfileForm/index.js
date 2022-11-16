@@ -10,12 +10,14 @@ import { Link } from 'react-router-dom';
 import { UPDATE_EMPLOYEE } from '../../utils/mutations';
 
 const ProfileForm = () => {
+    // Get currently logged in employee data
     const employeeId = Auth.getProfile().data._id;
     const { loading, data } = useQuery(QUERY_EMPLOYEE, { variables: { employeeId: employeeId }, })
     const employee = data?.employee || [];
     const employeeAddress = data?.employee.address || [];
     const emergencyContact = data?.employee.emergencyContact || [];
 
+    // Set default values to pass to form state
     const defaultValues = {
         phone: employee.phone,
         street: employeeAddress.street,
@@ -25,12 +27,13 @@ const ProfileForm = () => {
         emergencyPhone: emergencyContact.emergencyPhone,
     };
 
-    console.log(defaultValues);
-
+    // Set form state from default values
     const [formState, setFormState] = useState(defaultValues);
 
+    // Use mutation to update employee data
     const [updateEmployee] = useMutation(UPDATE_EMPLOYEE);
 
+    // Submit new employee data
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -40,11 +43,13 @@ const ProfileForm = () => {
         }
     };
 
+    // Update formstate on form change
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
     };
 
+    // Render components on page
     return (
         <div>
             {Auth.loggedIn() ? (

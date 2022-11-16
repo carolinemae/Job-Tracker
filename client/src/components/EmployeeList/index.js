@@ -11,14 +11,15 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Table from 'react-bootstrap/esm/Table';
 
 const EmployeeList = ({ employees }) => {
+    // Use mutation to update database
     const [toggleAdmin] = useMutation(TOGGLE_ADMIN);
     
-    console.log(employees);
-
+    // Render if no employees
     if (!employees.length) {
         return 'No Employees Yet';
     }
 
+    // Toggle employee administrative rights
     const handleToggle = async (event) => {
         event.preventDefault();
         try {
@@ -47,6 +48,7 @@ const EmployeeList = ({ employees }) => {
         }
     }
 
+    // Render components on page
     return (
         <div className='center wrap'>
             {employees && employees.map((employee) => (

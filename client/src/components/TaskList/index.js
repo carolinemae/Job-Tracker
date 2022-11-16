@@ -3,8 +3,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
 
 const TaskList = ({ tasks = [] }) => {
+    // Render components on page from tasks data
     return(
-        
         <Table striped bordered hover size="sm">
             <thead>
                 <tr>

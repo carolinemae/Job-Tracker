@@ -11,10 +11,12 @@ import Card from 'react-bootstrap/Card';
 import LoadingScreen from '../LoadingScreen';
 
 const MyTimesheetList = () => {
+    // Query currently logged in employee and get timesheet data
     const employeeId = Auth.getProfile().data._id;
     const { loading, data } = useQuery(QUERY_EMPLOYEE, { variables: { employeeId: employeeId }, })
     const myTimesheets = data?.employee.timesheets || [];
 
+    // Render components on page from data
     return (
         <div>
             {loading ? (

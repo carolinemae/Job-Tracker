@@ -7,12 +7,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Header = () => {
+    // Handle logout button event
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
         window.location.assign('/');
     };
 
+    // Render header components at the top of each page
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>

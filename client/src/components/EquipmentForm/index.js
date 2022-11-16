@@ -6,11 +6,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const EquipmentForm = () => {
+    // Set form state for equipment input fields
     const [formState, setFormState] = useState({
         equipId: '',
         equipName: '',
     });
 
+    // Use mutation to add new equipment and query equipment
     const [addEquipment, { error }] = useMutation(ADD_EQUIPMENT, {
         update(cache, { data: { addEquipment } }) {
             try {
@@ -25,6 +27,7 @@ const EquipmentForm = () => {
         }
     });
 
+    // Submit new equipment
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -37,11 +40,13 @@ const EquipmentForm = () => {
         }
     };
 
+    // Update form state on form change
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value, });
     };
 
+    // Render components on page
     return (
         <Form className='equip-form'>
             <Form.Group>

@@ -14,6 +14,7 @@ const TimesheetForm = () => {
     const savedEndTime = localStorage.getItem('endTime');
     const savedProject = localStorage.getItem('project');
 
+    // Set form state with above variables if any
     const [formState, setFormState] = useState({
         date: savedDate,
         startTime: savedStartTime,
@@ -22,8 +23,10 @@ const TimesheetForm = () => {
         employee: Auth.getProfile().data._id,
     });
 
+    // Use mutation to add timesheet
     const [addTimesheet] = useMutation(ADD_TIMESHEET);
 
+    // Submit timesheet data to create timesheet
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -39,15 +42,18 @@ const TimesheetForm = () => {
         }
     };
 
+    // Set form state on form change
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
         localStorage.setItem(name, value);
     };
 
+    // Query database for project data
     const { loading, data: projectData } = useQuery(QUERY_PROJECTS, );
     const projects = projectData?.projects || [];
 
+    // Render components on page
     return (
         <div>
             {loading ? (

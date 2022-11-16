@@ -8,8 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 const TimesheetList = ({ timesheets }) => {
+    // Use mutation to toggle timesheet approval
     const [toggleApproved] = useMutation(TOGGLE_APPROVED);
 
+    // Render if no timesheets
     if (!timesheets.length) {
         return 'No Timesheets Yet';
     }
@@ -35,6 +37,7 @@ const TimesheetList = ({ timesheets }) => {
         }
     }
 
+    // Render components on page from timesheet data
     return (
         <div>
             {timesheets && timesheets.map((timesheet) => (

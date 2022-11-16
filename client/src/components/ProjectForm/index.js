@@ -6,12 +6,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const ProjectForm = () => {
+    // Set empty form state
     const [formState, setFormState] = useState({
         projectName: '',
         location: '',
         description: '',
     });
 
+    // Use mutation to add new project and read query to update page content
     const [createProject, { error }] = useMutation(CREATE_PROJECT, {
         update(cache, { data: { createProject } }) {
             try {
@@ -26,6 +28,7 @@ const ProjectForm = () => {
         }
     });
 
+    // Submit form input to create new project
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -35,11 +38,13 @@ const ProjectForm = () => {
         }
     };
 
+    // Set form state on form change
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value, });
     };
 
+    // Render components on page
     return (
         <Form className='project-form'>
             <Form.Group>
