@@ -71,7 +71,7 @@ All employee details can be viewed if the user has administrative rights. An adm
 ---
 
 ## Links
-Deployed Link: [TBA](#)
+Deployed Link: [https://vast-woodland-80895.herokuapp.com](https://vast-woodland-80895.herokuapp.com)
 
 GitHub Repo: [https://github.com/carolinemae/Job-Tracker.git](https://github.com/carolinemae/Job-Tracker.git)
 
