@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import Login from '../pages/Login';
 
 const SingleTimesheet = () => {
+    // Query database using parameters
     const { timesheetId } = useParams();
     const { loading, data: timesheetData } = useQuery(QUERY_TIMESHEET, { variables: { timesheetId: timesheetId }, });
     const timesheet = timesheetData?.timesheet || [];

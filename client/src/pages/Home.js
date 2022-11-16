@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Login from '../pages/Login';
 
 const Home = () => {
+  // Render components on main homepage
   return (
     <main>
       <div>

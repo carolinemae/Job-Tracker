@@ -8,10 +8,12 @@ import Auth from '../utils/auth';
 import Login from '../pages/Login';
 
 const SingleProject = () => {
+    // Query databse using parameters
     const { projectId } = useParams();
     const { loading, data: projectData } = useQuery(QUERY_PROJECT, { variables: { projectId: projectId }, });
     const project = projectData?.project || [];
 
+    // Render components on page
     return (
         <div>
             {Auth.loggedIn() ? (

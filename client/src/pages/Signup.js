@@ -7,20 +7,24 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 const Signup = () => {
+  // Set form state for new employee
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
   });
+
+  // Use mutation to create employee login
   const [addEmployee, { error, data }] = useMutation(ADD_EMPLOYEE);
 
+  // Set form state on form change
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormState({ ...formState, [name]: value, });
   };
 
+  // Submit form data to create new employee
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -34,6 +38,7 @@ const Signup = () => {
     }
   };
 
+  // Render components on page
   return (
     <Form className='login-form' onSubmit={handleFormSubmit}>
       <Form.Group className="mb-3">

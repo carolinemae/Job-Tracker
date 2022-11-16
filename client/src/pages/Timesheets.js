@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 import Login from '../pages/Login';
 
 const Timesheets = () => {
+    // Query database for timesheets data
     const { loading, data } = useQuery(QUERY_TIMESHEETS);
     const timesheets = data?.timesheets || [];
 

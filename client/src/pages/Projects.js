@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import Login from '../pages/Login';
 
 const Projects = () => {
+    // Query database for projects data
     const { loading, data } = useQuery(QUERY_PROJECTS);
     const projects = data?.projects || [];
 

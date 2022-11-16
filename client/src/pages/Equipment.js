@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import Login from '../pages/Login';
 
 const Equipment = () => {
+    // Query database for equipment
     const { loading, data } = useQuery(QUERY_EQUIPMENT);
     const equipment = data?.equipment || [];
 

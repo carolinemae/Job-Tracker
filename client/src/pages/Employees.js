@@ -7,6 +7,7 @@ import { QUERY_EMPLOYEES } from '../utils/queries';
 import Login from '../pages/Login';
 
 const Employees = () => {
+    // Query database for employees data
     const { loading, data } = useQuery(QUERY_EMPLOYEES);
     const employees = data?.employees || [];
 
