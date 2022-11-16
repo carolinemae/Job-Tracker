@@ -15,7 +15,6 @@ const ProjectList = ({ projects }) => {
                     <th>Project Name</th>
                     <th>Location</th>
                     <th>Description</th>
-                    {/* <th>Active</th> */}
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +27,6 @@ const ProjectList = ({ projects }) => {
                         </td>
                         <td className='w-200'>{project.location}</td>
                         <td className='w-200'>{project.description}</td>
-                        {/* <td className='w-60'>{project.active}</td> */}
                     </tr>
                 ))}
             </tbody>

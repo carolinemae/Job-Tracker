@@ -12,7 +12,6 @@ import LoadingScreen from '../LoadingScreen';
 
 const EditTimesheetForm = ({ timesheetId }) => {
 
-    // Try query formatted date and populate form!
     const savedDate = moment().format('YYYY-MM-DD') || localStorage.getItem('date');
 
     const { loading, data: timesheetData } = useQuery(QUERY_TIMESHEET, 
@@ -75,9 +74,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
         console.log(formState);
     };
 
-    // const { data: projectsData } = useQuery(QUERY_PROJECTS);
-    // const projects = projectsData?.projects || [];
-
     const { data: equipmentData } = useQuery(QUERY_EQUIPMENT);
     const equipment = equipmentData?.equipment || [];
 
@@ -94,7 +90,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
                     <Form.Group className="mb-3">
                         <Form.Label>Date</Form.Label>
                         <Form.Text className='fixed-form-text'>{timesheet.date}</Form.Text>
-                        {/* <Form.Control type="date" name='date' value={formState.date} onChange={handleChange} /> */}
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Start Time</Form.Label>
@@ -107,14 +102,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
                     <Form.Group className="mb-3">
                         <Form.Label>Project</Form.Label>
                         <Form.Text className='fixed-form-text'>{timesheet.project}</Form.Text>
-                        {/* <Form.Select className='form-control' type="select" name='project' value={formState.project} onChange={handleChange}>
-                            <option>Select Project</option>
-                                {projects && projects.map((project) => (
-                                    <option name='project' key={project._id} value={project.projectName}>
-                                        {project.projectName}
-                                    </option>
-                                ))}
-                        </Form.Select> */}
                     </Form.Group>
                     <TaskList tasks={timesheet.tasks} />
                     <Form.Group className="mb-3">
@@ -144,7 +131,6 @@ const EditTimesheetForm = ({ timesheetId }) => {
                         </Link>
                     </Form.Group>
                 </Form>
-
                 <Modal show={showModal}>
                     <Modal.Body>
                         <p>Are you sure you want to delete this timesheet?</p>
