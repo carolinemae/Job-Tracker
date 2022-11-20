@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 
 const ProjectList = ({ projects }) => {
 
+    // Render if no projects
     if (!projects.length) {
         return 'No Projects Yet';
     }
 
+    // Else render components on page
     return (
         <Table striped bordered hover size="sm">
             <thead>
