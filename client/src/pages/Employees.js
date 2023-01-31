@@ -11,6 +11,10 @@ const Employees = () => {
     const { loading, data } = useQuery(QUERY_EMPLOYEES);
     const employees = data?.employees || [];
 
+    if (!employees.length) {
+        return '';
+    }
+
     return (
         <div>
             {Auth.loggedIn() ? (

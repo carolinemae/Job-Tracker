@@ -58,18 +58,20 @@ const EmployeeList = ({ employees }) => {
                         <FontAwesomeIcon icon={faUser} />
                     </Card.Header>
                     <Table>
-                        <tr>
-                            <th>Phone</th>
-                            <td>{employee.phone}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td><Link href={`mailto:${employee.email}`}>{employee.email}</Link></td>
-                        </tr>
-                        <tr>
-                            <th>Emergency Contact</th>
-                            <td>{employee.emergencyContact.emergencyPhone} ({employee.emergencyContact.emergencyName})</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{employee.phone}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><Link href={`mailto:${employee.email}`}>{employee.email}</Link></td>
+                            </tr>
+                            <tr>
+                                <th>Emergency Contact</th>
+                                <td>{employee.emergencyContact.emergencyPhone} ({employee.emergencyContact.emergencyName})</td>
+                            </tr>
+                        </tbody>
                     </Table>
                     <ListGroup>
                         <ListGroup.Item className='center'>
