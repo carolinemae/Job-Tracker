@@ -15,6 +15,11 @@ const MyTimesheetList = () => {
     const employeeId = Auth.getProfile().data._id;
     const { loading, data } = useQuery(QUERY_EMPLOYEE, { variables: { employeeId: employeeId }, })
     const myTimesheets = data?.employee.timesheets || [];
+    console.log(myTimesheets);
+
+    if (!myTimesheets.length) {
+        return '';
+    }
 
     // Render components on page from data
     return (
