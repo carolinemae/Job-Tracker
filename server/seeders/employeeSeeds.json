@@ -17,10 +17,27 @@
     }
   },
   {
-    "email": "dankain@hotmail.com",
+    "email": "manager@test.com",
+    "password": "password123",
+    "firstName": "Manager",
+    "lastName": "Test",
+    "admin": true,
+    "phone": "0412345678",
+    "address": {
+      "street": "112 Adelaide Road",
+      "city": "Mannum",
+      "postcode": "5238"
+    },
+    "emergencyContact": {
+      "emergencyName": "Caroline",
+      "emergencyPhone": "0412345678"
+    }
+  },
+  {
+    "email": "danbrett@hotmail.com",
     "password": "password123",
     "firstName": "Daniel",
-    "lastName": "Kain",
+    "lastName": "Brett",
     "phone": "0412345678",
     "address": {
       "street": "112 Adelaide Road",

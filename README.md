@@ -13,6 +13,12 @@ A web based application that gives employers the ability to track employee tasks
 ### Login
 Employees that have already created a login for the application can login by simply entering their email address and password that they registered when signing up. If not signed up yet, view instructions to signup.
 
+To preview the admin/manager functionality, please login with the details below:
+
+Email: ``manager@test.com``
+
+Password: ``password123``
+
 ### Signup
 A new employee can signup by using the link supplied, navigating to the /signup page and creating a login by entering their details and a password to access the site later.
 
